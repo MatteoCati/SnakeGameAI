@@ -1,0 +1,20 @@
+snakeai package
+===============
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   snakeai.agents
+   snakeai.game
+   snakeai.tests
+
+Module contents
+---------------
+
+.. automodule:: snakeai
+   :members:
+   :undoc-members:
+   :show-inheritance:

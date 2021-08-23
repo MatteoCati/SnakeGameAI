@@ -3,21 +3,23 @@ from enum import Enum
 class Coords():
     """A class for representing coordinates
     
-    Summing two coordinates together will some return the element-wise sum.
-    Two coords object can also be compared for equality. Printing it will reeturn the string *(x, y)*
+    Cating to string a Coords object will return the string *(x, y)*
+    Summing two coordinates together will do the element-wise sum.
+    Two Coords object can also be compared for equality. 
+
+    Parameters
+    -------------
+    x : int
+    y : int
+        
+    Attributes
+    --------------
+    x : int
+        The x coordinate
+    y : int
+        The y coordinate
     """
     def __init__(self, x, y):
-        """
-        Parameters
-        -------------
-        x : int
-        y : int
-        
-        Attributes
-        --------------
-        x : int
-        y : int
-        """
         self. x = x
         self.y = y
     
@@ -28,6 +30,9 @@ class Coords():
     
     def __str__(self) -> str:
         return "(" + str(self.x) + ", " + str(self.y) + ")"
+    
+    def __repr__(self) -> str:
+        return "Coords(" + str(self.x) + ", " + str(self.y) + ")"
     
     def __eq__(self, o: object) -> bool:
         if type(o) != type(self):

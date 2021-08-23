@@ -3,6 +3,9 @@ from snakeai.game.constants import Actions
 import time
 
 class GeneralView():
+    """
+    The base class for any view of the game. If this is used, it does not show anything
+    """
     def initScreen(self, dim, snake, apple, score):
         pass
 
@@ -20,13 +23,12 @@ class GeneralView():
 class GameGUI(GeneralView):
     """A GUI object for rendering and playing the game
 
-    This is the base class for all GUIs. It is used to make the user play.
+    This is the class used to make the user play.
 
     Attributes
     --------------
-    SQURE_SIDE : int 
+    SQUARE_SIDE : int 
         the side of each square (in pixels)
-    
     """
     def __init__(self):
         self.SQUARE_SIDE = 20
@@ -36,7 +38,7 @@ class GameGUI(GeneralView):
         """
         Create the window where the game will be shown
 
-        Parameters:
+        Parameters
         --------------
         dim : int
             the side of the board
@@ -60,7 +62,7 @@ class GameGUI(GeneralView):
         
         Returns
         -----------
-        Actions or ``"QUIT"``
+        `Actions` or ``"QUIT"``
             the current input"""
         for ev in pygame.event.get():
                 if ev.type == pygame.QUIT:
@@ -81,7 +83,7 @@ class GameGUI(GeneralView):
 
         Parameters
         ----------------
-        snake : list(Coords)
+        snake : list of Coords
         apple : Coords
         score  int
         isGameOver : Bool, default=False

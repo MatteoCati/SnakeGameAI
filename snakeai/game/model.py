@@ -1,8 +1,13 @@
-from snakeai.game.constants import Actions, Coords
+from snakeai.game.constants import Actions, Coords, Rewards
 import random
 
 class Snake():
     """A class which stores the info about the game
+
+    Parameters
+    -------------
+    dim : int
+        The side of the board
     
     Attributes
     ------------
@@ -20,12 +25,6 @@ class Snake():
         whether the snake has reached game over
     """
     def __init__(self, dim):
-        """
-        Parameters
-        -------------
-        dim : int
-            The side of the board
-        """
         self.dim = dim
         self.MAX_SCORE = dim*dim
         self.MAX_GROWING = int(0.9*dim*dim)
@@ -61,26 +60,40 @@ class Snake():
 
     @property
     def snake(self):
-        """snake : list(Coords) The body of the nake (head is last)"""
+        """list(Coords) : The body of the nake (head is last)"""
         return self._snake.copy()
     
     def step(self):
-        """Update model by moving snake of one step"""
+        """Update model by moving snake of one step
+        
+        Returns
+        -----------
+        Rewards
+            The reward obtained after the step
+        """
         nextHead = self._snake[-1] + self.direction.value
         if nextHead in self._snake: # Check collision with itself
             self.isGameOver = True
-            return
+            return Rewards.FAILED
         if not (0 <= nextHead.x < self.dim and 0 <= nextHead.y < self.dim): # Check collision with border
             self.isGameOver = True
-            return
+            return Rewards.FAILED
+        prevDistance = self._snake[-1].distance(self.apple)
         self._snake.append(nextHead)
         if nextHead == self.apple:
             self.score += 1
+            if self.score > self.MAX_GROWING:
+                self._snake.pop(0)
             self.setApple()
             self.isGameOver = self.score > self.MAX_SCORE
-            if self.score <= self.MAX_GROWING:
-                return
+            if self.isGameOver: return Rewards.ENDED
+            
+            return Rewards.GOT_APPLE
         self._snake.pop(0)
+        if self._snake[-1].distance(self.apple) > prevDistance:
+            return Rewards.AWAY
+        return Rewards.CLOSER
+
 
 
     
