@@ -29,6 +29,7 @@ class Snake():
         self.dim = dim
         self.MAX_SCORE = dim*dim
         self.MAX_GROWING = int(0.9*dim*dim)
+        self.highScore = 0
         self.reset()
     
     def reset(self):
@@ -37,6 +38,7 @@ class Snake():
         self.setApple()
         self.direction = Actions.DOWN
         self.score = 0
+        
         self.isGameOver = False
     
     @property
@@ -91,6 +93,7 @@ class Snake():
         self._snake.append(nextHead)
         if nextHead == self.apple:
             self.score += 1
+            self.highScore = max(self.score, self.highScore)
             if self.score > self.MAX_GROWING:
                 self._snake.pop(0)
             self.setApple()

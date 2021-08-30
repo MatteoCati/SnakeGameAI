@@ -1,6 +1,7 @@
 from snakeai.game.agent_controller import AgentGame
 from snakeai.agents.agent_interface import AbstractAgent
 from snakeai.game.constants import Actions
+import time
 
 if __name__ =="__main__":
     class MockAgent(AbstractAgent):
@@ -19,5 +20,5 @@ if __name__ =="__main__":
             return Actions.RIGHT
         
     agent = MockAgent(20)
-    game = AgentGame(20, show = True)
+    game = AgentGame(20, show = True, replayAllowed=True)
     game.play(agent)

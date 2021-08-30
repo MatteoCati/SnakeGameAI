@@ -15,9 +15,9 @@ class AgentGame(UserGame):
         the number of fps
     show : Bool, deafult=True
         Whether to show the GUI or not
-    closeOnFail : Bool default=True
-        whether the game should close immediately at game over
-    mode : str {window, cli}
+    replayAllowed : Bool, default=False
+        whether the game should wait for replay after game over
+    mode : str {window, cli}, default="window"
         The type of interface
 
     Attributes
@@ -28,13 +28,16 @@ class AgentGame(UserGame):
         The GUI for the game 
     frameTime : float
         The duration of each frame in seconds (if show is set to True)
-    closeOnFail : Bool
+    replayAllowed : bool
         Whether the game should close immediately at game over
+    toInit : bool
+        Whether the GUI should be initialized
     """
-    def __init__(self, dim = 20, fps = 7, show = True, closeOnFail = True, mode = "window"):
+    def __init__(self, dim = 20, fps = 7, show = True, replayAllowed = False, mode = "window"):
         self.model = Snake(dim)
         self.frameTime = 1/fps
-        if not show: closeOnFail = True
+        self.toInit = True
+        if not show: replayAllowed = False
         if show:
             if mode == "cli":
                 self.view = cliGUI()
@@ -43,7 +46,7 @@ class AgentGame(UserGame):
         else:
             self.view = GeneralView()
             self.frameTime = 0
-        self.closeOnFail = closeOnFail
+        self.replayAllowed = replayAllowed
     
     def start(self):
         """Start the game
@@ -54,7 +57,6 @@ class AgentGame(UserGame):
             The state at the beginning of the game
         """
         super().start()
-        self.counter = 0
         return self.model.state
 
     def step(self, action):
@@ -86,25 +88,41 @@ class AgentGame(UserGame):
         snake = self.model.snake
         apple = self.model.apple
         rew = self.model.step()
-        self.view.updateUI(self.model.snake, self.model.apple, self.model.score, self.model.isGameOver)
+        self.view.updateUI(self.model.snake, self.model.apple, self.model.score, self.model.highScore, self.model.isGameOver)
         time.sleep(max(0, self.frameTime - (time.time()-start)))
-        self.counter += 1
         return oldState, rew.value, self.model.state, self.model.isGameOver
     
-    def play(self, agent):
+    def reset(self):
+        if self.closeOnFail:
+            self.quit()
+
+    def play(self, agent= None):
         """Play a complete game
         
         Parameters
         ------------
-        agent : AbstractAgent
-            The agent that will play the game"""
+        agent : AbstractAgent, optional
+            The agent that will play the game. If not initialized, the program rais ean error
+            
+        Raises
+        -------
+        AttributeError
+            If the agent is not set
+        """
+        if agent:
+            self.agent = agent
+        if not self.agent:
+            raise AttributeError("Agent has not been given")
+        
         state = self.start()
-        agent.reset()
+        self.agent.reset()
         done = False
         rew = None
         while not self.model.isGameOver:
-            action = agent.execute(state)
+            action = self.agent.execute(state)
             oldState, rew, state, done = self.step(action)
-            agent.fit(oldState, action, rew, state, done)
-        self.view.updateUI(self.model.snake, self.model.apple, self.model.score, self.model.isGameOver)
-        self.waitForQuit()
+            self.agent.fit(oldState, action, rew, state, done)
+        self.view.updateUI(self.model.snake, self.model.apple, self.model.score, self.model.highScore, self.model.isGameOver)
+        time.sleep(self.frameTime)
+        if self.replayAllowed:
+            self.waitForQuit()

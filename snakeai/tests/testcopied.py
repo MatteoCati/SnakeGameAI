@@ -1,4 +1,3 @@
-from snakeai.agents.deep_agent import MLAgent
 from snakeai.agents.copy_agent import DQN
 from snakeai.game.agent_controller import AgentGame
 from collections import deque
@@ -24,8 +23,8 @@ def train(episodes, size):
     scores = deque(maxlen=20)
     avgs = list()
     t = tqdm(range(episodes))
+    game = AgentGame(size,show=True, fps =20, replayAllowed=False)
     for i in t:
-        game = AgentGame(size,show=False, fps =20)
         game.play(agent)
         scores.append((game.model.score))
         maxScore = max(maxScore, game.model.score)
@@ -45,6 +44,6 @@ if __name__ == "__main__":
     path = os.path.abspath(".\\models\\deepCopiedModel")
     agent = DQN(20)
     agent.model = load_model(path)
-    game = AgentGame(20, closeOnFail=False)
+    game = AgentGame(20, replayAllowed=True)
     agent.epsilon = 0
     game.play(agent)

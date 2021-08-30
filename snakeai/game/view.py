@@ -6,7 +6,7 @@ class GeneralView():
     """
     The base class for any view of the game. If this is used, it does not show anything
     """
-    def initScreen(self, dim, snake, apple, score):
+    def initScreen(self, dim, snake, apple, score, highScore):
         pass
 
     def quit(self):
@@ -15,7 +15,7 @@ class GeneralView():
     def getInput(self):
         pass
 
-    def updateUI(self, snake, apple, score, isGameOver = False):
+    def updateUI(self, snake, apple, score, highScore, isGameOver = False):
         pass
 
 
@@ -34,7 +34,7 @@ class GameGUI(GeneralView):
         self.SQUARE_SIDE = 20
 
     
-    def initScreen(self, dim, snake, apple, score):
+    def initScreen(self, dim, snake, apple, score, highScore):
         """
         Create the window where the game will be shown
 
@@ -49,9 +49,9 @@ class GameGUI(GeneralView):
         pygame.init()
         self.font = pygame.font.SysFont("freesans", 28)
         boardSide = self.SQUARE_SIDE*dim
-        self.screen = pygame.display.set_mode([max(293, boardSide), 33+boardSide])
+        self.screen = pygame.display.set_mode([max(327, boardSide), 33+boardSide])
         self.board = pygame.Surface((boardSide, boardSide))
-        self.updateUI(snake, apple, score)
+        self.updateUI(snake, apple, score, highScore)
     
     def quit(self):
         """Close the game"""
@@ -62,12 +62,14 @@ class GameGUI(GeneralView):
         
         Returns
         -----------
-        `Actions` or ``"QUIT"``
+        `Actions`, ``"REPLAY"`` or ``"QUIT"``
             the current input"""
         for ev in pygame.event.get():
                 if ev.type == pygame.QUIT:
                     return "QUIT"
                 if ev.type == pygame.KEYDOWN:
+                    if ev.key == pygame.K_r:
+                        return "REPLAY"
                     if ev.key == pygame.K_UP:
                         return Actions.UP
                     if ev.key == pygame.K_DOWN:
@@ -77,7 +79,7 @@ class GameGUI(GeneralView):
                     if ev.key == pygame.K_RIGHT:
                         return Actions.RIGHT
 
-    def updateUI(self, snake, apple, score, isGameOver = False):
+    def updateUI(self, snake, apple, score, highScore, isGameOver = False):
         """
         Update the GUI with the current state of the game
 
@@ -92,9 +94,11 @@ class GameGUI(GeneralView):
         self.board.fill((255, 255, 255))
         self.screen.fill((255, 255, 255))
         if isGameOver:
-            text = self.font.render("Game Over! - High score: " + str(score), True, (0,0,0))
+            text = self.font.render("Game Over! - Final score: " + str(score) + "/"+str(highScore), True, (0,0,0))
+            
         else:
-            text = self.font.render("Score: "+str(score), True, (0,0,0))
+            text = self.font.render("Score: "+str(score) + " - " + "High Score: " + str(highScore), True, (0,0,0))
+            
         
         self.screen.blit(text, (0, 0))
         
@@ -117,21 +121,23 @@ class GameGUI(GeneralView):
 
 class cliGUI(GeneralView):
     """A GUI object for rendering the game on the command line"""
-    def initScreen(self, dim, snake, apple, score):
+    def initScreen(self, dim, snake, apple, score, highScore):
         """Show the initial state of the game"""
         self.dim = dim
-        self.updateUI(snake, apple, score)
+        self.updateUI(snake, apple, score, highScore)
 
     def getInput(self):
         """Get the input fro mthe user and return the action
         Returns
         ---------
-        `Actions` or ``"QUIT"``
+        `Actions`, ``"REPLAY"`` or ``"QUIT"``
             the current input
         """
         inp = input("Choose action: ")
         if inp == "q":
             return "QUIT"
+        if inp == "r":
+            return "REPLAY"
         elif inp == "up":
             return Actions.UP
         elif inp == "down":
@@ -141,7 +147,7 @@ class cliGUI(GeneralView):
         elif inp == "right":
             return Actions.RIGHT
 
-    def updateUI(self, snake, apple, score, isGameOver = False):
+    def updateUI(self, snake, apple, score, highScore, isGameOver = False):
         """
         Print on the command line the current state of the game
 
@@ -149,13 +155,13 @@ class cliGUI(GeneralView):
         ----------------
         snake : list of Coords
         apple : Coords
-        score  int
+        score : int
         isGameOver : Bool, default=False
             if set to True, it shows the game over screen
         """
         if isGameOver:
             print("--" + "-"*self.dim)
-            print("Final Score:", score)
+            print("Final Score:", score, "/", highScore)
         print("--" + "-"*self.dim)
         for y in range(self.dim):
             row = "|"

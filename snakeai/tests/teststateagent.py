@@ -21,7 +21,7 @@ def train(episodes, size):
     maxScore = 0
     scores = deque(maxlen=1000)
     for i in tqdm(range(episodes)):
-        game = AgentGame(size,show=False)
+        game = AgentGame(size,show=False, replayAllowed=False)
         game.play(agent)
         scores.append((game.model.score))
         maxScore = max(maxScore, game.model.score)
@@ -33,7 +33,7 @@ def train(episodes, size):
     return agent
 
 if __name__ == "__main__":
-   # agent = train(100_000, 4)
+    agent = train(100_000, 4)
     agent = StateAgent(5, 0)
     path = os.path.abspath(".\\models\\CompleteStateAgentDictionaryDefault")
     agent.load(path)

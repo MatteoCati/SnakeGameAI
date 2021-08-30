@@ -233,7 +233,7 @@
 <h2>AgentGame<a class="headerlink" href="#agentgame" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="snakeai.game.agent_controller.AgentGame">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.game.agent_controller.</span></span><span class="sig-name descname"><span class="pre">AgentGame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">closeOnFail</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'window'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.agent_controller.AgentGame" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.game.agent_controller.</span></span><span class="sig-name descname"><span class="pre">AgentGame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replayAllowed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'window'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.agent_controller.AgentGame" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="snakeai.game.user_controller.html#snakeai.game.user_controller.UserGame" title="snakeai.game.user_controller.UserGame"><code class="xref py py-class docutils literal notranslate"><span class="pre">snakeai.game.user_controller.UserGame</span></code></a></p>
 <p>The class for controlling the game when played by an agent</p>
 <dl class="field-list simple">
@@ -242,8 +242,8 @@
 <li><p><strong>dim</strong> (<em>int, default=20</em>) – the side of the board</p></li>
 <li><p><strong>fps</strong> (<em>int, default=7</em>) – the number of fps</p></li>
 <li><p><strong>show</strong> (<em>Bool, deafult=True</em>) – Whether to show the GUI or not</p></li>
-<li><p><strong>closeOnFail</strong> (<em>Bool default=True</em>) – whether the game should close immediately at game over</p></li>
-<li><p><strong>mode</strong> (<em>str {window, cli}</em>) – The type of interface</p></li>
+<li><p><strong>replayAllowed</strong> (<em>Bool, default=False</em>) – whether the game should wait for replay after game over</p></li>
+<li><p><strong>mode</strong> (<em>str {window, cli}, default=”window”</em>) – The type of interface</p></li>
 </ul>
 </dd>
 <dt class="field-even">Variables</dt>
@@ -251,17 +251,21 @@
 <li><p><strong>model</strong> (<a class="reference internal" href="snakeai.game.model.html#snakeai.game.model.Snake" title="snakeai.game.model.Snake"><em>Snake</em></a>) – The model for the game</p></li>
 <li><p><strong>view</strong> (<a class="reference internal" href="snakeai.game.view.html#snakeai.game.view.GeneralView" title="snakeai.game.view.GeneralView"><em>GeneralView</em></a>) – The GUI for the game</p></li>
 <li><p><strong>frameTime</strong> (<em>float</em>) – The duration of each frame in seconds (if show is set to True)</p></li>
-<li><p><strong>closeOnFail</strong> (<em>Bool</em>) – Whether the game should close immediately at game over</p></li>
+<li><p><strong>replayAllowed</strong> (<em>Bool</em>) – Whether the game should close immediately at game over</p></li>
+<li><p><strong>toInit</strong> (<em>bool</em>) – Whether the GUI should be initialized</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="snakeai.game.agent_controller.AgentGame.play">
-<span class="sig-name descname"><span class="pre">play</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.agent_controller.AgentGame.play" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">play</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.agent_controller.AgentGame.play" title="Permalink to this definition">¶</a></dt>
 <dd><p>Play a complete game</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>agent</strong> (<em>AbstractAgent</em>) – The agent that will play the game</p>
+<dd class="field-odd"><p><strong>agent</strong> (<em>AbstractAgent, optional</em>) – The agent that will play the game. If not initialized, the program rais ean error</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>AttributeError</strong> – If the agent is not set</p>
 </dd>
 </dl>
 </dd></dl>
@@ -271,6 +275,11 @@
 <span class="sig-name descname"><span class="pre">quit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.agent_controller.AgentGame.quit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Quit the game</p>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakeai.game.agent_controller.AgentGame.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.agent_controller.AgentGame.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="snakeai.game.agent_controller.AgentGame.start">
