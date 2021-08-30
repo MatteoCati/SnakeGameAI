@@ -1,11 +1,12 @@
 from enum import Enum
+import math
 
 class Coords():
     """A class for representing coordinates
     
-    Cating to string a Coords object will return the string *(x, y)*
+    Casting to string a Coords object will return the string *(x, y)*
     Summing two coordinates together will do the element-wise sum.
-    Two Coords object can also be compared for equality. 
+    Two Coords objects can also be compared for equality. 
 
     Parameters
     -------------
@@ -39,7 +40,7 @@ class Coords():
             return False
         return o.x == self.x and o.y == self.y
     
-    def distance(self, other):
+    def _mandistance(self, other):
         """Calculate manhattan distance between this position and the other
 
         Parameters
@@ -62,6 +63,9 @@ class Coords():
             raise TypeError("It is not a Coord object")
         return abs(self.x - other.x) + abs(self.y - other.y)
 
+    def distance(self, other):
+        return math.sqrt((self.x-other.x)**2 + (self.y-other.y)**2)
+
 class Actions(Enum):
     """The actions that can be chosen"""
     UP = Coords(0, -1)
@@ -72,11 +76,11 @@ class Actions(Enum):
 class Rewards(Enum):
     """The possible rewards values
     
-    The isGameOver method can e used to check if a reward is a game over value"""
+    The isGameOver method can be used to check if a reward is a game over value"""
     GOT_APPLE = 10
     FAILED = -100
     ENDED = 100
-    CLOSER = -1
+    CLOSER = 1
     AWAY = -1
 
     @classmethod
@@ -86,7 +90,7 @@ class Rewards(Enum):
         Parameters
         ------------
         rew : Rewards
-            The rewards to check
+            The reward to check
         
         Returns
         ----------

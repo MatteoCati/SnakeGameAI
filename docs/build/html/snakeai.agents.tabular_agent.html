@@ -238,11 +238,11 @@ States are representeed as a string with all the positions of the snake plus the
 <dt class="field-even">Variables</dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>stateDict</strong> (<em>dict</em>) – The dictionar that stores Q values</p></li>
-<li><p><strong>GAMMA</strong> (<em>float</em>) – the gamma value for training</p></li>
-<li><p><strong>STEP</strong> (<em>float</em>) – the step size</p></li>
-<li><p><strong>EPSILON</strong> (<em>float</em>) – the epsilon value for epsilon-greedy</p></li>
-<li><p><strong>DECAY</strong> (<em>float</em>) – the decay rate for epsilon</p></li>
-<li><p><strong>MIN_EPSILON</strong> (<em>float</em>) – the minimum value for epsilon when decaying</p></li>
+<li><p><strong>GAMMA</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>]</em>) – the gamma value for training</p></li>
+<li><p><strong>STEP</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>]</em>) – the step size</p></li>
+<li><p><strong>EPSILON</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>]</em>) – the epsilon value for epsilon-greedy</p></li>
+<li><p><strong>DECAY</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>)</em>) – the decay rate for epsilon</p></li>
+<li><p><strong>MIN_EPSILON</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>]</em>) – the minimum value for epsilon when decaying</p></li>
 </ul>
 </dd>
 </dl>
@@ -262,14 +262,11 @@ States are representeed as a string with all the positions of the snake plus the
 
 <dl class="py method">
 <dt class="sig sig-object py" id="snakeai.agents.tabular_agent.StateAgent.execute">
-<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">snake</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apple</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.tabular_agent.StateAgent.execute" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.tabular_agent.StateAgent.execute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the next action to do, given the state</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>snake</strong> (<em>list(Coords)</em>) – the position of the snake</p></li>
-<li><p><strong>apple</strong> (<em>Coords</em>) – the position of the apple</p></li>
-</ul>
+<dd class="field-odd"><p><strong>state</strong> (<em>FrozenState</em>) – the current state of the game</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>the direction in which  to move</p>
@@ -282,16 +279,15 @@ States are representeed as a string with all the positions of the snake plus the
 
 <dl class="py method">
 <dt class="sig sig-object py" id="snakeai.agents.tabular_agent.StateAgent.fit">
-<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oldSnake</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">oldApple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rew</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">snake</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">done</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.tabular_agent.StateAgent.fit" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oldState</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rew</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">done</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.tabular_agent.StateAgent.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the Q values</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>oldSnake</strong> (<em>list(Coords)</em>) – The initial snake</p></li>
-<li><p><strong>oldApple</strong> (<em>Coords</em>) – The initial position of the apple</p></li>
+<li><p><strong>oldState</strong> (<em>FrozenState</em>) – the state of the game before taking the action</p></li>
+<li><p><strong>action</strong> (<em>Actions</em>) – The action taken</p></li>
 <li><p><strong>rew</strong> (<em>int</em>) – The reward obtained</p></li>
-<li><p><strong>snake</strong> (<em>list(Coords)</em>) – The new snake</p></li>
-<li><p><strong>apple</strong> (<em>Coords</em>) – The new position of the apple</p></li>
+<li><p><strong>state</strong> (<em>FrozenState</em>) – the state of the game after taking the action</p></li>
 <li><p><strong>done</strong> (<em>bool</em>) – Whether the new state is terminal</p></li>
 </ul>
 </dd>
@@ -308,20 +304,6 @@ States are representeed as a string with all the positions of the snake plus the
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><strong>TypeError</strong> – If the data in the file is not a dict or a defauldict</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="snakeai.agents.tabular_agent.StateAgent.refineState">
-<span class="sig-name descname"><span class="pre">refineState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">snake</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apple</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.tabular_agent.StateAgent.refineState" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert state to a string</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>snake</strong> (<em>list(Coords)</em>) – the snake</p></li>
-<li><p><strong>apple</strong> (<em>Coords</em>) – the position of the apple</p></li>
-</ul>
 </dd>
 </dl>
 </dd></dl>

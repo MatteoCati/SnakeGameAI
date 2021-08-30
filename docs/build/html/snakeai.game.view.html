@@ -33,7 +33,7 @@
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="snakeai.tests package" href="snakeai.tests.html" />
+    <link rel="next" title="snakeai.game.memento module" href="snakeai.game.memento.html" />
     <link rel="prev" title="snakeai.game.agent_controller module" href="snakeai.game.agent_controller.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -164,6 +164,11 @@
      snakeai.game.view module
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.game.memento.html">
+     snakeai.game.memento module
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1">
@@ -199,6 +204,11 @@
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#gamegui">
    GameGUI
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cligui">
+   cliGUI
   </a>
  </li>
 </ul>
@@ -322,6 +332,46 @@
 </dd></dl>
 
 </div>
+<div class="section" id="cligui">
+<h2>cliGUI<a class="headerlink" href="#cligui" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="snakeai.game.view.cliGUI">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.game.view.</span></span><span class="sig-name descname"><span class="pre">cliGUI</span></span><a class="headerlink" href="#snakeai.game.view.cliGUI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#snakeai.game.view.GeneralView" title="snakeai.game.view.GeneralView"><code class="xref py py-class docutils literal notranslate"><span class="pre">snakeai.game.view.GeneralView</span></code></a></p>
+<p>A GUI object for rendering the game on the command line</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="snakeai.game.view.cliGUI.getInput">
+<span class="sig-name descname"><span class="pre">getInput</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.view.cliGUI.getInput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the input fro mthe user and return the action
+:returns: the current input
+:rtype: <cite>Actions</cite> or <code class="docutils literal notranslate"><span class="pre">&quot;QUIT&quot;</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakeai.game.view.cliGUI.initScreen">
+<span class="sig-name descname"><span class="pre">initScreen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">snake</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.view.cliGUI.initScreen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show the initial state of the game</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakeai.game.view.cliGUI.updateUI">
+<span class="sig-name descname"><span class="pre">updateUI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">snake</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">isGameOver</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.view.cliGUI.updateUI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print on the command line the current state of the game</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>snake</strong> (<em>list of Coords</em>)</p></li>
+<li><p><strong>apple</strong> (<em>Coords</em>)</p></li>
+<li><p><strong>score  int</strong></p></li>
+<li><p><strong>isGameOver</strong> (<em>Bool, default=False</em>) – if set to True, it shows the game over screen</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -331,7 +381,7 @@
               <div class='prev-next-bottom'>
                 
     <a class='left-prev' id="prev-link" href="snakeai.game.agent_controller.html" title="previous page">snakeai.game.agent_controller module</a>
-    <a class='right-next' id="next-link" href="snakeai.tests.html" title="next page">snakeai.tests package</a>
+    <a class='right-next' id="next-link" href="snakeai.game.memento.html" title="next page">snakeai.game.memento module</a>
 
               </div>
               

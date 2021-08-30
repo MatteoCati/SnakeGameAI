@@ -127,6 +127,11 @@
      snakeai.agent.tabular_agent module
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.agents.copy_agent.html">
+     snakeai.agent.copy_agent module
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
@@ -162,6 +167,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="snakeai.game.view.html">
      snakeai.game.view module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.game.memento.html">
+     snakeai.game.memento module
     </a>
    </li>
   </ul>
@@ -223,7 +233,7 @@
 <h2>AgentGame<a class="headerlink" href="#agentgame" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="snakeai.game.agent_controller.AgentGame">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.game.agent_controller.</span></span><span class="sig-name descname"><span class="pre">AgentGame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">closeOnFail</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.agent_controller.AgentGame" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.game.agent_controller.</span></span><span class="sig-name descname"><span class="pre">AgentGame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">closeOnFail</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'window'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.agent_controller.AgentGame" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="snakeai.game.user_controller.html#snakeai.game.user_controller.UserGame" title="snakeai.game.user_controller.UserGame"><code class="xref py py-class docutils literal notranslate"><span class="pre">snakeai.game.user_controller.UserGame</span></code></a></p>
 <p>The class for controlling the game when played by an agent</p>
 <dl class="field-list simple">
@@ -233,6 +243,7 @@
 <li><p><strong>fps</strong> (<em>int, default=7</em>) – the number of fps</p></li>
 <li><p><strong>show</strong> (<em>Bool, deafult=True</em>) – Whether to show the GUI or not</p></li>
 <li><p><strong>closeOnFail</strong> (<em>Bool default=True</em>) – whether the game should close immediately at game over</p></li>
+<li><p><strong>mode</strong> (<em>str {window, cli}</em>) – The type of interface</p></li>
 </ul>
 </dd>
 <dt class="field-even">Variables</dt>
@@ -267,11 +278,10 @@
 <dd><p>Start the game</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><ul class="simple">
-<li><p><em>list of Coords</em> – The position of the snake</p></li>
-<li><p><em>Coords</em> – The position of the apple</p></li>
-</ul>
-</p>
+<dd class="field-odd"><p>The state at the beginning of the game</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="snakeai.game.memento.html#snakeai.game.memento.FrozenState" title="snakeai.game.memento.FrozenState">FrozenState</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -286,11 +296,9 @@
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><ul class="simple">
-<li><p><em>list(Coords)</em> – The coordinates of the old snake</p></li>
-<li><p><em>Coords</em> – The coordinates of the old apple</p></li>
+<li><p><em>FrozenState</em> – The state before the step</p></li>
 <li><p><em>int</em> – The reward obtained</p></li>
-<li><p><em>list(Coords)</em> – The coordinates of the new snake</p></li>
-<li><p><em>Coords</em> – The coordinates of the new apple</p></li>
+<li><p><em>FrozenState</em> – The state after the step</p></li>
 <li><p><em>Bool</em> – True if the new state is terminal, False otherwise</p></li>
 </ul>
 </p>

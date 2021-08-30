@@ -11,11 +11,11 @@ if __name__ =="__main__":
         def reset(self):
             pass
 
-        def fit(self, oldSnake, oldApple, rew, snake, apple, done):
+        def fit(self, oldState, action, rew, state, done):
             print("Training ", self.count)
             self.count+=1
         
-        def execute(self, snake, apple) -> Actions:
+        def execute(self, state) -> Actions:
             return Actions.RIGHT
         
     agent = MockAgent(20)

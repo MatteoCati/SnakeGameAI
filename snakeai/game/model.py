@@ -1,4 +1,5 @@
 from snakeai.game.constants import Actions, Coords, Rewards
+from snakeai.game.memento import FrozenState
 import random
 
 class Snake():
@@ -32,12 +33,17 @@ class Snake():
     
     def reset(self):
         """Prepare to start the game"""
-        self._snake = [Coords(0,0)]
+        self._snake = [Coords(self.dim//2,self.dim//2)]
         self.setApple()
         self.direction = Actions.DOWN
         self.score = 0
         self.isGameOver = False
     
+    @property
+    def state(self):
+        """FrozenState : A description of the current state"""
+        return FrozenState(self.snake, self.apple, self.direction, self.dim)
+
     def setApple(self):
         """Choose new valid position for the apple"""
         positions = list()
@@ -49,18 +55,21 @@ class Snake():
         self.apple = random.choice(positions)
     
     def changeDirection(self, direction):
-        """Change the direction of the snake
+        """Change the direction of the snake. Ignore it if it is opposite to current direction
         
         Parameters
         -------------
         direction : Actions
             the new direction of the snake
         """
+        opposites = [(Actions.UP, Actions.DOWN), (Actions.DOWN, Actions.UP), (Actions.LEFT, Actions.RIGHT), (Actions.RIGHT, Actions.LEFT)]
+        if (direction, self.direction) in opposites:
+            return
         self.direction = direction
 
     @property
     def snake(self):
-        """list(Coords) : The body of the nake (head is last)"""
+        """list of Coords : The body of the nake (head is last)"""
         return self._snake.copy()
     
     def step(self):
@@ -90,7 +99,7 @@ class Snake():
             
             return Rewards.GOT_APPLE
         self._snake.pop(0)
-        if self._snake[-1].distance(self.apple) > prevDistance:
+        if self._snake[-1].distance(self.apple) >= prevDistance:
             return Rewards.AWAY
         return Rewards.CLOSER
 

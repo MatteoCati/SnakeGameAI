@@ -1,4 +1,4 @@
-from snakeai.game.view import GameGUI
+from snakeai.game.view import GameGUI, cliGUI
 from snakeai.game.model import Snake
 from snakeai.game.constants import Actions
 import time
@@ -11,8 +11,10 @@ class UserGame():
     dim : int, default=20
         the side of the board
     fps : int, default=3
-    closeOnFail : Bool default=False
+    closeOnFail : Bool, default=False
         whether the game should close immediately at game over
+    mode : str {window, cli}
+        The type of interface
 
     Attributes
     --------------
@@ -25,9 +27,12 @@ class UserGame():
     closeOnFail : Bool
         Whether the game should close immediately at game over
     """
-    def __init__(self, dim = 20, fps = 3, closeOnFail = False):
+    def __init__(self, dim = 20, fps = 3, closeOnFail = False, mode="window"):
         self.model = Snake(dim)
-        self.view = GameGUI()
+        if mode == "cli":
+            self.view = cliGUI()
+        else:
+            self.view = GameGUI()
         self.frameTime = 1/fps
         self.closeOnFail = closeOnFail
     

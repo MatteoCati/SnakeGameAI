@@ -22,15 +22,15 @@ class StateAgent(AbstractAgent):
     ----------------
     stateDict : dict
         The dictionar that stores Q values
-    GAMMA : float
+    GAMMA : float [0, 1]
         the gamma value for training
-    STEP : float
+    STEP : float [0, 1]
         the step size
-    EPSILON: float
+    EPSILON: float [0, 1]
         the epsilon value for epsilon-greedy
-    DECAY : float
+    DECAY : float [0, 1)
         the decay rate for epsilon
-    MIN_EPSILON : float
+    MIN_EPSILON : float [0, 1]
         the minimum value for epsilon when decaying
     """
     def __init__(self, dim, epsilon = 1):
@@ -52,55 +52,23 @@ class StateAgent(AbstractAgent):
             The default value"""
         return [2,2,2,2]
 
-    def refineState(self, snake, apple):
-        """Convert state to a string
+    def reset(self):
+        self.prevAction = 1
         
-        Parameters
-        -----------
-        snake : list(Coords)
-            the snake
-        apple : Coords
-            the position of the apple
-        """
-        state = [str(el) for el in snake]
-        state.append(str(apple))
-        return "".join(state)
-
-    def _refineStateEasy(self, snake, apple):
-        state = []
-        state.append(int(snake[-1].x > apple.x))
-        state.append(int(snake[-1].x < apple.x))
-        state.append(int(snake[-1].y > apple.y))
-        state.append(int(snake[-1].y < apple.y))
-        
-        isEmpty = lambda c: (not c in snake) and 0 <= c.x < self.dim and 0 <= c.y < self.dim
-        up = snake[-1] + Actions.UP.value
-        down = snake[-1] + Actions.DOWN.value
-        left = snake[-1] + Actions.LEFT.value
-        right = snake[-1]+ Actions.RIGHT.value
-        state.append(int(isEmpty(up)))
-        state.append(int(isEmpty(down)))
-        state.append(int(isEmpty(left)))
-        state.append(int(isEmpty(right)))
-        state.append(self.prevAction)
-        return "".join(map(str, state))
-        
-    def execute(self, snake, apple):
+    def execute(self, state):
         """Get the next action to do, given the state
         
         Parameters
         --------------
-        snake : list(Coords)
-            the position of the snake
-        apple : Coords
-            the position of the apple
-        
+        state : FrozenState
+            the current state of the game
+
         Returns
         --------------
         Actions
             the direction in which  to move
         """
-        state = self.refineState(snake, apple)
+        state = state.tableString
         action = self.stateDict[state].index(max(self.stateDict[state]))
         if random.random() < self.EPSILON:
             action = random. choice([0,1,2,3])
@@ -114,26 +82,24 @@ class StateAgent(AbstractAgent):
         else:
             return  Actions.RIGHT 
     
-    def fit(self, oldSnake, oldApple, rew, snake, apple, done):
+    def fit(self, oldState, action, rew, state, done):
         """Update the Q values
         
         Parameters
         -----------
-        oldSnake : list(Coords)
-            The initial snake
-        oldApple : Coords
-            The initial position of the apple
+        oldState : FrozenState
+            the state of the game before taking the action
+        action : Actions
+            The action taken
         rew : int
             The reward obtained
-        snake : list(Coords)
-            The new snake
-        apple : Coords
-            The new position of the apple
+        state : FrozenState
+            the state of the game after taking the action
         done : bool
             Whether the new state is terminal
         """
-        oldState = self.refineState(oldSnake, oldApple)
-        nextState = self.refineState(snake, apple)
+        oldState = oldState.tableString
+        nextState = state.tableString
         if not done:
             self.stateDict[oldState][self.prevAction] = self.stateDict[oldState][self.prevAction] +\
                             self.STEP * (rew + self.GAMMA*max(self.stateDict[nextState]) - self.stateDict[oldState][self.prevAction])

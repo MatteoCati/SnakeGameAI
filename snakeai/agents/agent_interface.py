@@ -17,15 +17,13 @@ class AbstractAgent():
     def __init__(self, dim):
         self.dim = dim
 
-    def execute(self, snake, apple) -> Actions:
+    def execute(self, state) -> Actions:
         """Get the next action to do, given the state
         
         Parameters
         --------------
-        snake : list(Coords)
-            the position of the snake
-        apple : Coords
-            the position of the apple
+        state : FrozenState
+            The current state of the game
         
         Returns
         --------------
@@ -35,32 +33,30 @@ class AbstractAgent():
         Raises
         ------------
         NotImplementedError
-            This method should always be overriden
+            This method must always be overriden
         """
         raise NotImplementedError
     
-    def fit(self, oldSnake, oldApple, rew, snake, apple, done):
+    def fit(self, oldState, action, rew, state, done):
         """Train the agent with data for a single step
         
         Parameters
         -----------
-        oldSnake : list(Coords)
-            The initial snake
-        oldApple : Coords
-            The initial position of the apple
+        oldState : FrozenState
+            The state before taking the action
+        action : Actions
+            The action taken
         rew : int
             The reward obtained
-        snake : list(Coords)
-            The new snake
-        apple : Coords
-            The new position of the apple
+        state : FrozenState
+            The state after taking the action
         done : bool
             Whether the new state is terminal
         
         Raises
         ----------
         NotImplementedError
-            This method must be overridden"""
+            This method must always be overridden"""
         raise NotImplementedError
     
     def reset(self):

@@ -3,7 +3,7 @@ from snakeai.game.constants import Actions, Rewards
 from snakeai.game.model import Snake
 import random
 
-
+import time
 class Recursive(AbstractAgent):
     """A Class for an agent that uses recursion
     
@@ -37,28 +37,27 @@ class Recursive(AbstractAgent):
             sim = Snake(self.dim)
             sim._snake = original.snake
             sim.apple = original.apple
+            sim.direction = original.direction
             sim.changeDirection(dir)
             r = sim.step()
             nextRew = r.value
-            if r != Rewards.FAILED and depth < self.maxDepth:
+            if not Rewards.isGameOver(r) and depth < self.maxDepth:
                 r2, _ = self._recursion(sim, depth+1)
                 nextRew += r2 * self.gamma
             if mass < nextRew:
                 mass = nextRew
                 ok = [dir]
-            elif mass == nextRew:
+            elif mass == nextRew: 
                 ok.append(dir)
         return mass, random.choice(ok)
     
-    def execute(self, snake, apple):
+    def execute(self, state):
         """Get the next action to do, given the state
         
         Parameters
         --------------
-        snake : list(Coords)
-            the position of the snake
-        apple : Coords
-            the position of the apple
+        state : FrozenState
+            the current state of the game
         
         Returns
         --------------
@@ -66,12 +65,13 @@ class Recursive(AbstractAgent):
             the direction in which  to move
         """
         original = Snake(self.dim)
-        original._snake = snake
-        original.apple = apple
+        original._snake = state.snake.copy()
+        original.apple = state.apple
+        original.direction = state.direction
         best, dir = self._recursion(original, 1)
         return dir
     
-    def fit(self, oldSnake, oldApple, rew, snake, apple, done):
+    def fit(self, oldState, action, rew, state, done):
         """This agent does not need to train, so this method does nothing"""
         pass
 

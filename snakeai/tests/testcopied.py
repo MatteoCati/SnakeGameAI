@@ -1,8 +1,10 @@
+from snakeai.agents.deep_agent import MLAgent
+from snakeai.agents.copy_agent import DQN
 from snakeai.game.agent_controller import AgentGame
-from snakeai.agents.tabular_agent import StateAgent
-import os
 from collections import deque
 from tqdm import tqdm
+import matplotlib.pyplot as plt
+from tensorflow.keras.models import load_model
 
 def train(episodes, size):
     """Train a StateAgent
@@ -17,27 +19,32 @@ def train(episodes, size):
         The number of episodes in which the agent is trained
     size: int
         The size of the board (side length)"""
-    agent = StateAgent(size)
+    agent = DQN(size)
     maxScore = 0
-    scores = deque(maxlen=1000)
-    for i in tqdm(range(episodes)):
-        game = AgentGame(size,show=False)
+    scores = deque(maxlen=20)
+    avgs = list()
+    t = tqdm(range(episodes))
+    for i in t:
+        game = AgentGame(size,show=False, fps =20)
         game.play(agent)
         scores.append((game.model.score))
         maxScore = max(maxScore, game.model.score)
+        t.set_postfix_str(f"HS: {maxScore}, avg: {sum(scores)/len(scores):.2f}")
+        avgs.append(sum(scores)/len(scores))
         agent.reset()
-    #agent.save()
-    print("Epsilon:", agent.EPSILON)
+    print("\nEpsilon:", agent.epsilon)
     print("High Score:", maxScore)
     print("Average score:", sum(scores)/len(scores))
+    plt.plot(range(len(avgs)), avgs, "o")
+    plt.show()
     return agent
 
 if __name__ == "__main__":
-   # agent = train(100_000, 4)
-    agent = StateAgent(5, 0)
-    path = os.path.abspath(".\\models\\CompleteStateAgentDictionaryDefault")
-    agent.load(path)
-    #agent.EPSILON = 0
-    game = AgentGame(5, closeOnFail=False)
+    import os
+    #agent = train(60, 20)
+    path = os.path.abspath(".\\models\\deepCopiedModel")
+    agent = DQN(20)
+    agent.model = load_model(path)
+    game = AgentGame(20, closeOnFail=False)
+    agent.epsilon = 0
     game.play(agent)
-    

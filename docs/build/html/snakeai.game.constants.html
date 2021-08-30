@@ -236,9 +236,9 @@
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.game.constants.</span></span><span class="sig-name descname"><span class="pre">Coords</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.constants.Coords" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A class for representing coordinates</p>
-<p>Cating to string a Coords object will return the string <em>(x, y)</em>
+<p>Casting to string a Coords object will return the string <em>(x, y)</em>
 Summing two coordinates together will do the element-wise sum.
-Two Coords object can also be compared for equality.</p>
+Two Coords objects can also be compared for equality.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -256,22 +256,7 @@ Two Coords object can also be compared for equality.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="snakeai.game.constants.Coords.distance">
 <span class="sig-name descname"><span class="pre">distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.constants.Coords.distance" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculate manhattan distance between this position and the other</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>other</strong> (<em>Coords</em>) – the other coordinates</p>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>the distance</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>TypeError</strong> – if <cite>other</cite> is not of type Coords</p>
-</dd>
-</dl>
-</dd></dl>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -313,7 +298,7 @@ Two Coords object can also be compared for equality.</p>
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.game.constants.</span></span><span class="sig-name descname"><span class="pre">Rewards</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.constants.Rewards" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
 <p>The possible rewards values</p>
-<p>The isGameOver method can e used to check if a reward is a game over value</p>
+<p>The isGameOver method can be used to check if a reward is a game over value</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="snakeai.game.constants.Rewards.AWAY">
 <span class="sig-name descname"><span class="pre">AWAY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">-1</span></em><a class="headerlink" href="#snakeai.game.constants.Rewards.AWAY" title="Permalink to this definition">¶</a></dt>
@@ -321,7 +306,7 @@ Two Coords object can also be compared for equality.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="snakeai.game.constants.Rewards.CLOSER">
-<span class="sig-name descname"><span class="pre">CLOSER</span></span><em class="property"> <span class="pre">=</span> <span class="pre">-1</span></em><a class="headerlink" href="#snakeai.game.constants.Rewards.CLOSER" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">CLOSER</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#snakeai.game.constants.Rewards.CLOSER" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -345,7 +330,7 @@ Two Coords object can also be compared for equality.</p>
 <dd><p>Check if a reward is considered game over</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>rew</strong> (<em>Rewards</em>) – The rewards to check</p>
+<dd class="field-odd"><p><strong>rew</strong> (<em>Rewards</em>) – The reward to check</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Whether is game over or not</p>

@@ -1,5 +1,5 @@
 from snakeai.game.model import Snake
-from snakeai.game.view import GeneralView, GameGUI
+from snakeai.game.view import GeneralView, GameGUI, cliGUI
 from snakeai.game.constants import Actions, Rewards
 from snakeai.game.user_controller import UserGame
 import time
@@ -17,6 +17,8 @@ class AgentGame(UserGame):
         Whether to show the GUI or not
     closeOnFail : Bool default=True
         whether the game should close immediately at game over
+    mode : str {window, cli}
+        The type of interface
 
     Attributes
     --------------
@@ -29,12 +31,15 @@ class AgentGame(UserGame):
     closeOnFail : Bool
         Whether the game should close immediately at game over
     """
-    def __init__(self, dim = 20, fps = 7, show = True, closeOnFail = True):
+    def __init__(self, dim = 20, fps = 7, show = True, closeOnFail = True, mode = "window"):
         self.model = Snake(dim)
         self.frameTime = 1/fps
         if not show: closeOnFail = True
         if show:
-            self.view = GameGUI()
+            if mode == "cli":
+                self.view = cliGUI()
+            else:
+                self.view = GameGUI()
         else:
             self.view = GeneralView()
             self.frameTime = 0
@@ -45,13 +50,12 @@ class AgentGame(UserGame):
         
         Returns
         ---------
-        list of Coords
-            The position of the snake
-        Coords
-            The position of the apple
+        FrozenState
+            The state at the beginning of the game
         """
         super().start()
-        return self.model.snake, self.model.apple
+        self.counter = 0
+        return self.model.state
 
     def step(self, action):
         """Execute one step (frame) of the game
@@ -63,16 +67,12 @@ class AgentGame(UserGame):
 
         Returns
         ------------
-        list(Coords)
-            The coordinates of the old snake
-        Coords
-            The coordinates of the old apple
+        FrozenState
+            The state before the step
         int
             The reward obtained
-        list(Coords)
-            The coordinates of the new snake
-        Coords
-            The coordinates of the new apple
+        FrozenState
+            The state after the step
         Bool
             True if the new state is terminal, False otherwise
         """
@@ -81,13 +81,15 @@ class AgentGame(UserGame):
         if q == "QUIT":
             self.quit()
             raise SystemExit
+        oldState = self.model.state
         self.model.changeDirection(action)
         snake = self.model.snake
         apple = self.model.apple
         rew = self.model.step()
         self.view.updateUI(self.model.snake, self.model.apple, self.model.score, self.model.isGameOver)
         time.sleep(max(0, self.frameTime - (time.time()-start)))
-        return snake, apple, rew.value, self.model.snake, self.model.apple, self.model.isGameOver
+        self.counter += 1
+        return oldState, rew.value, self.model.state, self.model.isGameOver
     
     def play(self, agent):
         """Play a complete game
@@ -96,13 +98,13 @@ class AgentGame(UserGame):
         ------------
         agent : AbstractAgent
             The agent that will play the game"""
-        snake, apple = self.start()
+        state = self.start()
         agent.reset()
         done = False
         rew = None
         while not self.model.isGameOver:
-            action = agent.execute(snake, apple)
-            oldSnake, oldApple, rew, snake, apple, done = self.step(action)
-            agent.fit(oldSnake, oldApple, rew, snake, apple, done)
+            action = agent.execute(state)
+            oldState, rew, state, done = self.step(action)
+            agent.fit(oldState, action, rew, state, done)
         self.view.updateUI(self.model.snake, self.model.apple, self.model.score, self.model.isGameOver)
         self.waitForQuit()

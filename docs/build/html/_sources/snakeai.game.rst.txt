@@ -12,6 +12,7 @@ Submodules
    snakeai.game.user_controller
    snakeai.game.agent_controller
    snakeai.game.view
+   snakeai.game.memento
 
 
 

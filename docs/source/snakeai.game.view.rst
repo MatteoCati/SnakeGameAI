@@ -15,3 +15,11 @@ GameGUI
    :members:
    :undoc-members:
    :show-inheritance:
+
+cliGUI
+------
+.. autoclass:: snakeai.game.view.cliGUI
+   :members:
+   :undoc-members:
+   :show-inheritance:
+

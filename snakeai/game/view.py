@@ -1,5 +1,5 @@
 import pygame
-from snakeai.game.constants import Actions
+from snakeai.game.constants import Actions, Coords
 import time
 
 class GeneralView():
@@ -49,7 +49,7 @@ class GameGUI(GeneralView):
         pygame.init()
         self.font = pygame.font.SysFont("freesans", 28)
         boardSide = self.SQUARE_SIDE*dim
-        self.screen = pygame.display.set_mode([max(280, boardSide), 33+boardSide])
+        self.screen = pygame.display.set_mode([max(293, boardSide), 33+boardSide])
         self.board = pygame.Surface((boardSide, boardSide))
         self.updateUI(snake, apple, score)
     
@@ -92,7 +92,7 @@ class GameGUI(GeneralView):
         self.board.fill((255, 255, 255))
         self.screen.fill((255, 255, 255))
         if isGameOver:
-            text = self.font.render("Game Over! - High score: "+str(score), True, (0,0,0))
+            text = self.font.render("Game Over! - High score: " + str(score), True, (0,0,0))
         else:
             text = self.font.render("Score: "+str(score), True, (0,0,0))
         
@@ -115,4 +115,58 @@ class GameGUI(GeneralView):
         self.screen.blit(self.board, (horPosition, text.get_height()))
         pygame.display.update()
 
+class cliGUI(GeneralView):
+    """A GUI object for rendering the game on the command line"""
+    def initScreen(self, dim, snake, apple, score):
+        """Show the initial state of the game"""
+        self.dim = dim
+        self.updateUI(snake, apple, score)
+
+    def getInput(self):
+        """Get the input fro mthe user and return the action
+        Returns
+        ---------
+        `Actions` or ``"QUIT"``
+            the current input
+        """
+        inp = input("Choose action: ")
+        if inp == "q":
+            return "QUIT"
+        elif inp == "up":
+            return Actions.UP
+        elif inp == "down":
+            return Actions.DOWN
+        elif inp == "left":
+            return Actions.LEFT
+        elif inp == "right":
+            return Actions.RIGHT
+
+    def updateUI(self, snake, apple, score, isGameOver = False):
+        """
+        Print on the command line the current state of the game
+
+        Parameters
+        ----------------
+        snake : list of Coords
+        apple : Coords
+        score  int
+        isGameOver : Bool, default=False
+            if set to True, it shows the game over screen
+        """
+        if isGameOver:
+            print("--" + "-"*self.dim)
+            print("Final Score:", score)
+        print("--" + "-"*self.dim)
+        for y in range(self.dim):
+            row = "|"
+            for x in range(self.dim):
+                c = Coords(x, y)
+                if c == apple:
+                    row += "o"
+                elif c in snake:
+                    row += "x"
+                else: row += " "
+            row += "|"
+            print(row)
+        print("--" + "-"*self.dim)
 
