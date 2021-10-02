@@ -233,7 +233,7 @@
 <h2>FrozenState<a class="headerlink" href="#frozenstate" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="snakeai.game.memento.FrozenState">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.game.memento.</span></span><span class="sig-name descname"><span class="pre">FrozenState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">snake</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.memento.FrozenState" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.game.memento.</span></span><span class="sig-name descname"><span class="pre">FrozenState</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">snake</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="snakeai.game.constants.html#snakeai.game.constants.Coords" title="snakeai.game.constants.Coords"><span class="pre">snakeai.game.constants.Coords</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apple</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.constants.html#snakeai.game.constants.Coords" title="snakeai.game.constants.Coords"><span class="pre">snakeai.game.constants.Coords</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.constants.html#snakeai.game.constants.Actions" title="snakeai.game.constants.Actions"><span class="pre">snakeai.game.constants.Actions</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.memento.FrozenState" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A class that stores the state of the game in a given moment.</p>
 <dl class="field-list simple">
@@ -254,8 +254,9 @@
 </dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="snakeai.game.memento.FrozenState.simpleState">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">simpleState</span></span><a class="headerlink" href="#snakeai.game.memento.FrozenState.simpleState" title="Permalink to this definition">¶</a></dt>
-<dd><p>A list with the insformations about obstacles, position of the apple relative to the position of the snake, current direction</p>
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">simpleState</span></span><em class="property"><span class="pre">:</span> <span class="pre">List[int]</span></em><a class="headerlink" href="#snakeai.game.memento.FrozenState.simpleState" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list with the information about obstacles, position of the apple
+relative to the position of the snake, current direction</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>list</p>
@@ -264,8 +265,19 @@
 </dd></dl>
 
 <dl class="py property">
+<dt class="sig sig-object py" id="snakeai.game.memento.FrozenState.table">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">table</span></span><em class="property"><span class="pre">:</span> <span class="pre">List[List[int]]</span></em><a class="headerlink" href="#snakeai.game.memento.FrozenState.table" title="Permalink to this definition">¶</a></dt>
+<dd><p>A table representing the board at the current state</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>2d list of int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
 <dt class="sig sig-object py" id="snakeai.game.memento.FrozenState.tableString">
-<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">tableString</span></span><a class="headerlink" href="#snakeai.game.memento.FrozenState.tableString" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">tableString</span></span><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#snakeai.game.memento.FrozenState.tableString" title="Permalink to this definition">¶</a></dt>
 <dd><p>A string with the coords of the snake and of the apple</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>

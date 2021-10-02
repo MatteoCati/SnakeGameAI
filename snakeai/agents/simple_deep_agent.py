@@ -1,21 +1,25 @@
 import random
-import numpy as np
 from collections import deque
+import numpy as np
 from keras.layers import Dense
 from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.optimizers import Adam
 from snakeai.game.constants import Actions
 from snakeai.agents.agent_interface import AbstractAgent
+from tensorflow.keras.models import load_model
+
+from snakeai.game.memento import FrozenState
+
 
 class DQN(AbstractAgent):
     """An agent that uses deep learning, using a simplified description of the state
-    
+
     Parameters
     -----------
     dim : int
         the dimension of the board (side length)
-    
+
     Attributes
     -----------
     dim : int
@@ -37,12 +41,10 @@ class DQN(AbstractAgent):
     model : keras.Model
         The model used by the agent
     """
-    def __init__(self, dim):
-
+    def __init__(self, dim: int):
+        super().__init__(dim)
         self.action_space = 4
         self.state_space = 12
-        self.dim = dim
-
         self.epsilon = 1
         self.gamma = 0.95
         self.batch_size = 500
@@ -53,7 +55,7 @@ class DQN(AbstractAgent):
         self.model = self.build_model()
 
 
-    def build_model(self):
+    def build_model(self) -> keras.Model:
         """Create The Deep Learning model"""
         inputs = keras.Input((self.state_space,))
         x = Dense(128, activation = "relu")(inputs)
@@ -64,7 +66,7 @@ class DQN(AbstractAgent):
         model.compile(optimizer = Adam(learning_rate=self.learning_rate), loss="mse")
         return model
 
-    def execute(self, state):
+    def execute(self, state: FrozenState) -> Actions:
         """Get the next action to do, given the state
         Parameters
         -----------
@@ -84,15 +86,15 @@ class DQN(AbstractAgent):
             act =  np.argmax(act_values[0])
         if act == 0:
             return Actions.UP
-        elif act == 1:
+        if act == 1:
             return Actions.RIGHT
-        elif act == 2:
+        if act == 2:
             return Actions.DOWN
         return Actions.LEFT
 
-    def fit(self, oldState, action, rew, state, done):
+    def fit(self, oldState: FrozenState, action: Actions, rew: int, state: FrozenState, done: bool):
         """Add the current step to the memory and train the model
-        
+
         Parameters
         ------------
         oldState : FrozenState
@@ -102,7 +104,7 @@ class DQN(AbstractAgent):
         rew : int
             The reward obtained after taking the action
         state : FrozenState
-            The state after takinf the action
+            The state after taking the action
         done : bool
             Whether the state is terminal 
         """
@@ -130,9 +132,21 @@ class DQN(AbstractAgent):
         targets = rewards + self.gamma*(np.amax(self.model.predict(next_states), axis=1))*(1-dones)
         targets_full = self.model.predict(states)
 
-        ind = np.array([i for i in range(self.batch_size)])
-       # print(actions)
+        ind = np.array(list(range(self.batch_size)))
         targets_full[[ind], [actions]] = targets
         self.model.fit(states, targets_full, epochs=1, verbose=0)
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
+
+    def save(self, model_path: str = None):
+        """Save the model to a file. if no path is given, it uses a default one."""
+        if not model_path:
+            model_path = ".\\models\\deepCopiedModel"
+        self.model.save(model_path)
+
+    @classmethod
+    def load(cls, dim: int, model_path: str) -> 'DQN':
+        """Create a new agent from the given file."""
+        agent = cls(dim)
+        agent.model = load_model(model_path)
+        return agent

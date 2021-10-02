@@ -1,151 +1,191 @@
-from snakeai.game.model import Snake
-from snakeai.game.constants import Actions, Coords
-from snakeai.agents.agent_interface import AbstractAgent
 import random
-from tensorflow import keras
-import tensorflow as tf
-from tensorflow.keras import layers
-import numpy as np
 from collections import deque
+from snakeai.agents.agent_interface import AbstractAgent
+from snakeai.game.memento import FrozenState
+from snakeai.game.constants import Actions
+from keras.layers import Dense, Conv2D, Flatten
+from tensorflow import keras
+from tensorflow.keras import layers
+from tensorflow.keras.optimizers import Adam
+import numpy as np
+from tensorflow.keras.models import load_model
 
-class MLAgent(AbstractAgent):
+class DeepQAgent(AbstractAgent):
+    """An agent that uses deep learning, using a simplified description of the state
+
+    Parameters
+    -----------
+    dim : int
+        the dimension of the board (side length)
+
+    Attributes
+    -----------
+    dim : int
+        the size of the board (side length)
+    action_space : int
+        The number of actions to choose from
+    epsilon : float [0, 1]
+        The current epsilon value
+    gamma : float [0, 1]
+        The discount factor
+    batch_size : int
+        The dimension of each batch for training
+    epsilon_min : float [0, 1]
+        The minimum value for epsilon
+    epsilon_decay : float [0, 1)
+        The decay factor of epsilon at each episode
+    learning_rate : float [0, 1]
+        The learning rate
+    memory : deque
+        The list of states used for learning
+    model : keras.Model
+        The model used by the agent
+    targetModel : keras.Model
+        The model used as target during training
+    updatePeriod : int
+        The number of episodes after which the targetModel is updated
+    lastUpdate : int
+        The number of episodes occurred since last update of targetModel
+    prevState1 : list(list(int))
+        The previous state
+    prevState2 : list(list(int))
+        The state 2 time steps ago
+    prevState3 : list(list(int))
+        The state 3 time steps ago 
+    """
+
     def __init__(self, dim):
-       # self.MAX_TRAIN_SIZE = 2000
-        self.BATCH_SIZE = 500
-        self.GAMMA = 0.95
-        self.UPDATE_TARGET_MODEL = 50
-        self.EPSILON = 1
-        self.MIN_EPSILON = 0.01
-        self.EPSILON_DECAY = 0.995
-        
-        self.dim = dim
+        super().__init__(dim)
+
+        self.action_space = 4
+        self.epsilon = 1
+        self.gamma = 0.95
+        self.batch_size = 500
+        self.epsilon_min = 0.01
+        self.epsilon_decay = 0.995
+        self.learning_rate = 0.00025
+        self.memory = deque(maxlen=2500)
         self.model = self.createModel()
-        self.trainingData = deque(maxlen = 5000)
-        self.prevAction = None
-        self.num_episodes = 0
-    
-    def reset(self):
-        self.prevAction = None
-        self.num_episodes += 1
-        if self.EPSILON > self.MIN_EPSILON:
-            self.EPSILON *= self.EPSILON_DECAY
-        #if self.num_episodes > self.UPDATE_TARGET_MODEL:
-        #    self.num_episodes = 0
-        #    self.target_model.set_weights(self.model.get_weights())
-    
-    def _tablecreateModel(self):
-        inputs = keras.Input((self.dim, self.dim, 1))
-        x = layers.Conv2D(filters= 32, kernel_size = 3, activation = "relu")(inputs)
-        x = layers.Flatten()(x)
-        x = layers.Dense(64, activation = "relu")(x)
-        x = layers.Dense(64, activation = "relu")(x)
-        outputs = layers.Dense(4, activation = "linear", name = "output")(x)
-        model = keras.Model(inputs = inputs, outputs = [outputs])
-        model.compile(optimizer = keras.optimizers.Adam(learning_rate=0.03), loss={'output': 'mse'}, metrics={'output': 'accuracy'})
-        return model
+        self.targetModel = self.createModel()
+        self.updatePeriod = 20
+        self.lastUpdate = 0
+        self.updateTargetModel()
+
+        self.prevState1 = None
+        self.prevState2 = None
+        self.prevState3 = None
+
+    def updateTargetModel(self):
+        """Update target model with weights from the current model"""
+        self.targetModel.set_weights(self.model.get_weights())
 
     def createModel(self):
-        inputs = keras.Input((12,))
-        x = layers.Dense(128, activation = "relu")(inputs)
-        x = layers.Dense(128, activation = "relu")(x)
-        x = layers.Dense(128, activation = "relu")(x)
-        outputs = layers.Dense(4, activation = "linear", name = "output")(x)
+        """Create The Deep Learning model"""
+        inputs = keras.Input((self.dim, self.dim, 2))
+        x = Conv2D(filters = 32, kernel_size=(5,5), activation="relu")(inputs)
+        x = Conv2D(filters = 64, kernel_size=(3,3), activation="relu")(x)
+        x = Conv2D(filters = 128, kernel_size=(2,2), activation="relu")(x)
+        x = Flatten()(x)
+        x = Dense(512, activation = "relu")(x)
+        #x = Dense(128, activation = "relu")(x)
+        #x = Dense(128, activation = "relu")(x)
+        outputs = layers.Dense(self.action_space, activation = "linear", name = "output")(x)
         model = keras.Model(inputs = inputs, outputs = [outputs])
-        model.compile(optimizer = keras.optimizers.Adam(learning_rate=0.00025), loss={'output': 'mse'}, metrics={'output': 'accuracy'})
+        model.compile(optimizer = Adam(learning_rate=self.learning_rate), loss="mse")
         return model
-    
-    def _difrefineData(self, snake, apple):
-        data = list()
-        for y in range(self.dim):
-            t = list()
-            for x in range(self.dim):
-                p = Coords(x, y)
-                if p == snake[-1]:
-                    t.append(3)
-                elif p in snake:
-                    t.append(2)
-                elif p == apple:
-                    t.append(1)
-                else:
-                    t.append(0)
-            data.append(t)
-        return np.array(data).reshape(-1, self.dim*self.dim)
-    
-    def refineData(self, snake, apple):
-        data = []
-        data.append(1 if apple.y < snake[-1].y else 0) # Is apple up
-        data.append(1 if apple.y > snake[-1].y else 0) # Is apple down
-        data.append(1 if apple.x < snake[-1].x else 0) # Is apple left
-        data.append(1 if apple.x > snake[-1].x else 0) # Is apple right
-
-        isEmpty = lambda c: (not c in snake) and 0 <= c.x < self.dim and 0 < c.y < self.dim
-        up = Actions.UP.value + snake[-1]
-        if isEmpty(up): data.append(1)
-        else: data.append(0)
-
-        down = Actions.DOWN.value + snake[-1]
-        if isEmpty(down): data.append(1)
-        else: data.append(0)
-
-        left = Actions.LEFT.value + snake[-1]
-        if isEmpty(left): data.append(1)
-        else: data.append(0)
-
-        right = Actions.RIGHT.value + snake[-1]
-        if isEmpty(right): data.append(1)
-        else: data.append(0)
-
-        data.append(int(self.prevAction == 0))
-        data.append(int(self.prevAction == 1))
-        data.append(int(self.prevAction == 2))
-        data.append(int(self.prevAction == 3))
-
-        return np.array(data).reshape(-1, 12)
 
 
-    
-    def execute(self, snake, apple):
-        if random.random() < self.EPSILON:
-            self.prevAction = random.choice([0,1,2,3])
+    def execute(self, state) -> Actions:
+        st = state.table
+        if self.prevState1:
+            table = [self.prevState3, self.prevState2, self.prevState1, st]
         else:
-            state = self.refineData(snake, apple)
-            probs = self.model.predict(state)
-            self.prevAction = np.argmax(probs)
-        if self.prevAction == 0:
+            table = [st, st, st, st]
+        table = np.reshape(table, (-1, self.dim, self.dim, 2))
+        if np.random.rand() <= self.epsilon:
+            act =  random.randrange(self.action_space)
+        else:
+            act_values = self.model.predict(table)
+            act =  np.argmax(act_values[0])
+        if act == 0:
             return Actions.UP
-        elif self.prevAction == 1:
+        if act == 1:
+            return Actions.RIGHT
+        if act == 2:
             return Actions.DOWN
-        elif self.prevAction == 2:
-            return Actions.LEFT
-        return Actions.RIGHT
-        
-    def fit(self, oldSnake, oldApple, action, rew, snake, apple, done):
-        oldState = self.refineData(oldSnake, oldApple)
-        state = self.refineData(snake, apple)
-        self.trainingData.append((oldState, self.prevAction, rew, state, done))
-        self.train()
-        
-    def train(self):
-        if len(self.trainingData) < self.BATCH_SIZE:
+        return Actions.LEFT
+
+
+    def fit(self, oldState, action, rew, state, done):
+        """Add the current step to the memory and train the model
+
+        Parameters
+        ------------
+        oldState : FrozenState
+            The state of the game before taking the action
+        action : Actions
+            The action chosen
+        rew : int
+            The reward obtained after taking the action
+        state : FrozenState
+            The state after takinf the action
+        done : bool
+            Whether the state is terminal
+        """
+        action = [Actions.UP, Actions.RIGHT, Actions.DOWN, Actions.LEFT].index(action)
+        st = oldState.table
+        if self.prevState:
+            table = [self.prevState, st]
+        else:
+            table = [st, st]
+        oldTable = np.reshape(table, (-1, self.dim, self.dim, 2))
+
+        table = np.reshape([oldState.table, state.table], (-1, self.dim, self.dim, 2))
+
+        self.memory.append((oldTable, action, rew, table, done))
+        self.prevState = oldState.table
+        self.replay()
+        if done:
+            self.lastUpdate += 1
+            if self.lastUpdate > self.updatePeriod :
+                self.updateTargetModel()
+                self.lastUpdate = 0
+
+    def replay(self):
+        """Train the model with one batch"""
+        if len(self.memory) < self.batch_size:
             return
-        batch = random.sample(self.trainingData, self.BATCH_SIZE)
-        x = []
-        y = []
-        for (state, action, reward, nextState, isGameOver) in batch:
-            x.append(state)
-            currentEstimate = self.model.predict(state)[0]
-            Q = reward
-            if not isGameOver:
-                Q += self.GAMMA * np.max(self.model.predict(nextState))
-            if action == Actions.UP:
-                currentEstimate[0] = Q
-            elif action == Actions.DOWN:
-                currentEstimate[1] = Q
-            elif action == Actions.LEFT:
-                currentEstimate[2] = Q
-            else:
-                currentEstimate[3] = Q
-            y.append(currentEstimate)
-        #print("fit", np.array(x).shape)
-        self.model.fit(x = np.array(x).reshape(-1, 12), y = np.array(y), batch_size = self.BATCH_SIZE, 
-                       verbose = 0, shuffle=False)
+
+        minibatch = random.sample(self.memory, self.batch_size)
+        states = np.array([i[0] for i in minibatch])
+        actions = np.array([i[1] for i in minibatch])
+        rewards = np.array([i[2] for i in minibatch])
+        next_states = np.array([i[3] for i in minibatch])
+        dones = np.array([i[4] for i in minibatch])
+
+        states = np.squeeze(states)
+        next_states = np.squeeze(next_states)
+
+        targets = rewards + self.gamma*(np.amax(self.targetModel.predict(next_states), axis=1))*(1-dones)
+
+        targets_full = self.targetModel.predict(states)
+
+        ind = np.array(list(range(self.batch_size)))
+        targets_full[[ind], [actions]] = targets
+        self.model.fit(states, targets_full, epochs=1, verbose=0)
+        if self.epsilon > self.epsilon_min:
+            self.epsilon *= self.epsilon_decay
+
+    @classmethod
+    def load(cls, dim, model_path):
+        agent = cls(dim)
+        path = model_path+"Size"+str(dim)
+        agent.model = load_model(path)
+        agent.updateTargetModel()
+        return agent
+
+    def save(self, model_path = None):
+        if not model_path:
+            model_path = ".\\models\\deepQModel"
+        path = model_path + "Size" + str(self.dim)
+        self.model.save(path)

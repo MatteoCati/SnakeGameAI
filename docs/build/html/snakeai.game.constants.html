@@ -127,6 +127,11 @@
      snakeai.agent.tabular_agent module
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.agents.copy_agent.html">
+     snakeai.agent.copy_agent module
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
@@ -162,6 +167,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="snakeai.game.view.html">
      snakeai.game.view module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.game.memento.html">
+     snakeai.game.memento module
     </a>
    </li>
   </ul>
@@ -206,6 +216,11 @@
    Rewards
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#guimode">
+   GUIMode
+  </a>
+ </li>
 </ul>
 
 </nav>
@@ -233,12 +248,12 @@
 <h2>Coords<a class="headerlink" href="#coords" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="snakeai.game.constants.Coords">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.game.constants.</span></span><span class="sig-name descname"><span class="pre">Coords</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.constants.Coords" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.game.constants.</span></span><span class="sig-name descname"><span class="pre">Coords</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.constants.Coords" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A class for representing coordinates</p>
-<p>Casting to string a Coords object will return the string <em>(x, y)</em>
+<p>Casting to string a <cite>Coords</cite> object will return the string <em>(x, y)</em>
 Summing two coordinates together will do the element-wise sum.
-Two Coords objects can also be compared for equality.</p>
+Two <cite>Coords</cite> objects can also be compared for equality.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -255,7 +270,52 @@ Two Coords objects can also be compared for equality.</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="snakeai.game.constants.Coords.distance">
-<span class="sig-name descname"><span class="pre">distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.constants.Coords.distance" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#snakeai.game.constants.Coords" title="snakeai.game.constants.Coords"><span class="pre">snakeai.game.constants.Coords</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#snakeai.game.constants.Coords.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate distance between two coordinates</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>other</strong> (<em>Coords</em>) – the other coordinates</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the distance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>TypeError</strong> – if <cite>other</cite> is not of type <cite>Coords</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakeai.game.constants.Coords.manhattan_distance">
+<span class="sig-name descname"><span class="pre">manhattan_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#snakeai.game.constants.Coords" title="snakeai.game.constants.Coords"><span class="pre">snakeai.game.constants.Coords</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#snakeai.game.constants.Coords.manhattan_distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate manhattan distance between this position and the other</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>other</strong> (<em>Coords</em>) – the other coordinates</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the distance</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>TypeError</strong> – if <cite>other</cite> is not of type <cite>Coords</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakeai.game.constants.Coords.x">
+<span class="sig-name descname"><span class="pre">x</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#snakeai.game.constants.Coords.x" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakeai.game.constants.Coords.y">
+<span class="sig-name descname"><span class="pre">y</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#snakeai.game.constants.Coords.y" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -267,25 +327,25 @@ Two Coords objects can also be compared for equality.</p>
 <dt class="sig sig-object py" id="snakeai.game.constants.Actions">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.game.constants.</span></span><span class="sig-name descname"><span class="pre">Actions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.constants.Actions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
-<p>The actions that can be chosen</p>
+<p>The actions that can be chosen to move the snake</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="snakeai.game.constants.Actions.DOWN">
-<span class="sig-name descname"><span class="pre">DOWN</span></span><em class="property"> <span class="pre">=</span> <span class="pre">Coords(0,</span> <span class="pre">1)</span></em><a class="headerlink" href="#snakeai.game.constants.Actions.DOWN" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">DOWN</span></span><em class="property"> <span class="pre">=</span> <span class="pre">Coords(x=0,</span> <span class="pre">y=1)</span></em><a class="headerlink" href="#snakeai.game.constants.Actions.DOWN" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="snakeai.game.constants.Actions.LEFT">
-<span class="sig-name descname"><span class="pre">LEFT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">Coords(-1,</span> <span class="pre">0)</span></em><a class="headerlink" href="#snakeai.game.constants.Actions.LEFT" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">LEFT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">Coords(x=-1,</span> <span class="pre">y=0)</span></em><a class="headerlink" href="#snakeai.game.constants.Actions.LEFT" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="snakeai.game.constants.Actions.RIGHT">
-<span class="sig-name descname"><span class="pre">RIGHT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">Coords(1,</span> <span class="pre">0)</span></em><a class="headerlink" href="#snakeai.game.constants.Actions.RIGHT" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">RIGHT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">Coords(x=1,</span> <span class="pre">y=0)</span></em><a class="headerlink" href="#snakeai.game.constants.Actions.RIGHT" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="snakeai.game.constants.Actions.UP">
-<span class="sig-name descname"><span class="pre">UP</span></span><em class="property"> <span class="pre">=</span> <span class="pre">Coords(0,</span> <span class="pre">-1)</span></em><a class="headerlink" href="#snakeai.game.constants.Actions.UP" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">UP</span></span><em class="property"> <span class="pre">=</span> <span class="pre">Coords(x=0,</span> <span class="pre">y=-1)</span></em><a class="headerlink" href="#snakeai.game.constants.Actions.UP" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -321,12 +381,12 @@ Two Coords objects can also be compared for equality.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="snakeai.game.constants.Rewards.GOT_APPLE">
-<span class="sig-name descname"><span class="pre">GOT_APPLE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">10</span></em><a class="headerlink" href="#snakeai.game.constants.Rewards.GOT_APPLE" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">GOT_APPLE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">100</span></em><a class="headerlink" href="#snakeai.game.constants.Rewards.GOT_APPLE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="snakeai.game.constants.Rewards.isGameOver">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">isGameOver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rew</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.constants.Rewards.isGameOver" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">isGameOver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rew</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#snakeai.game.constants.Rewards" title="snakeai.game.constants.Rewards"><span class="pre">snakeai.game.constants.Rewards</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#snakeai.game.constants.Rewards.isGameOver" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if a reward is considered game over</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -340,6 +400,31 @@ Two Coords objects can also be compared for equality.</p>
 </dd>
 </dl>
 </dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="guimode">
+<h2>GUIMode<a class="headerlink" href="#guimode" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="snakeai.game.constants.GUIMode">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.game.constants.</span></span><span class="sig-name descname"><span class="pre">GUIMode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.constants.GUIMode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>How the GUI should be displayed</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakeai.game.constants.GUIMode.CLI">
+<span class="sig-name descname"><span class="pre">CLI</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#snakeai.game.constants.GUIMode.CLI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakeai.game.constants.GUIMode.NO_SHOW">
+<span class="sig-name descname"><span class="pre">NO_SHOW</span></span><em class="property"> <span class="pre">=</span> <span class="pre">3</span></em><a class="headerlink" href="#snakeai.game.constants.GUIMode.NO_SHOW" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakeai.game.constants.GUIMode.WINDOW">
+<span class="sig-name descname"><span class="pre">WINDOW</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#snakeai.game.constants.GUIMode.WINDOW" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

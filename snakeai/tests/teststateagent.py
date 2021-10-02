@@ -1,13 +1,12 @@
 from snakeai.game.agent_controller import AgentGame
 from snakeai.agents.tabular_agent import StateAgent
-import os
 from collections import deque
 from tqdm import tqdm
 
-def train(episodes, size):
+def train(episodes, size, show= False, agent : StateAgent = None):
     """Train a StateAgent
     
-    This mehod will train a StateAgent for a certain amount of steps. 
+    This method will train a StateAgent for a certain amount of steps.
     Then it will print some stats about it. The agent will be returned by the function. The 
     states are not saved on a file.
     
@@ -16,28 +15,32 @@ def train(episodes, size):
     episodes: int
         The number of episodes in which the agent is trained
     size: int
-        The size of the board (side length)"""
-    agent = StateAgent(size)
+        The size of the board (side length)
+    show: bool, default=False
+        Whether the GUI should be visible
+    agent: StateAgent, optional
+        The agent to be trained
+    """
+    if not agent:
+        agent = StateAgent(size)
     maxScore = 0
     scores = deque(maxlen=1000)
     for i in tqdm(range(episodes)):
-        game = AgentGame(size,show=False, replayAllowed=False)
+        game = AgentGame(size,show=show, replay_allowed=False)
         game.play(agent)
         scores.append((game.model.score))
         maxScore = max(maxScore, game.model.score)
         agent.reset()
-    #agent.save()
-    print("Epsilon:", agent.EPSILON)
+    print("Epsilon:", agent.epsilon)
     print("High Score:", maxScore)
     print("Average score:", sum(scores)/len(scores))
     return agent
 
-if __name__ == "__main__":
-    agent = train(100_000, 4)
-    agent = StateAgent(5, 0)
-    path = os.path.abspath(".\\models\\CompleteStateAgentDictionaryDefault")
-    agent.load(path)
-    #agent.EPSILON = 0
-    game = AgentGame(5, closeOnFail=False)
+def play(dim = 5, model_path= None, fps= 7):
+    if not model_path:
+        model_path = ".\\models\\CompleteStateAgentDictionary"
+        dim = 4
+    agent = StateAgent.load(dim, model_path)
+    agent.epsilon = 0
+    game = AgentGame(dim, fps=fps, replay_allowed=True)
     game.play(agent)
-    

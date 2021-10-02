@@ -18,7 +18,12 @@ if __name__ =="__main__":
         
         def execute(self, state) -> Actions:
             return Actions.RIGHT
+        @classmethod
+        def load(cls, dim, model_path):
+            pass
+        def save(self, model_path = None):
+            pass
         
     agent = MockAgent(20)
-    game = AgentGame(20, show = True, replayAllowed=True)
+    game = AgentGame(20, show = True, replay_allowed=True)
     game.play(agent)

@@ -12,18 +12,26 @@ snakeai.tests.testgame module
    :undoc-members:
    :show-inheritance:
 
-snakeai.tests.teststateagent module
+snakeai.tests.testrecursive module
 ------------------------------------
+
+.. automodule:: snakeai.tests.testrecursive
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+snakeai.tests.teststateagent module
+-----------------------------
 
 .. automodule:: snakeai.tests.teststateagent
    :members:
    :undoc-members:
    :show-inheritance:
 
-snakeai.tests.testview module
+snakeai.tests.testcopied module
 -----------------------------
 
-.. automodule:: snakeai.tests.testview
+.. automodule:: snakeai.tests.testcopied
    :members:
    :undoc-members:
    :show-inheritance:

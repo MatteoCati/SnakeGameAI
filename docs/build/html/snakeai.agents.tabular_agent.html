@@ -33,7 +33,7 @@
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="snakeai.game package" href="snakeai.game.html" />
+    <link rel="next" title="snakeai.agent.copy_agent module" href="snakeai.agents.copy_agent.html" />
     <link rel="prev" title="snakeai.agent.recursive_agent module" href="snakeai.agents.recursive_agent.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -127,6 +127,11 @@
      snakeai.agent.tabular_agent module
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.agents.copy_agent.html">
+     snakeai.agent.copy_agent module
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -162,6 +167,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="snakeai.game.view.html">
      snakeai.game.view module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.game.memento.html">
+     snakeai.game.memento module
     </a>
    </li>
   </ul>
@@ -223,46 +233,64 @@
 <h2>StateAgent<a class="headerlink" href="#stateagent" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="snakeai.agents.tabular_agent.StateAgent">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.agents.tabular_agent.</span></span><span class="sig-name descname"><span class="pre">StateAgent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.tabular_agent.StateAgent" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.agents.tabular_agent.</span></span><span class="sig-name descname"><span class="pre">StateAgent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_epsilon</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.tabular_agent.StateAgent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="snakeai.agents.agent_interface.html#snakeai.agents.agent_interface.AbstractAgent" title="snakeai.agents.agent_interface.AbstractAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">snakeai.agents.agent_interface.AbstractAgent</span></code></a></p>
 <p>A class for an agent that uses a tabular method</p>
 <p>All Q values for the states are recorded. The agent chooses the action that maximizes Q.
-States are representeed as a string with all the positions of the snake plus the position of the apple.</p>
+States are represented as a string with all the positions of the snake plus the position
+of the apple.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>dim</strong> (<em>int</em>) – the side of the board</p></li>
-<li><p><strong>epsilon</strong> (<em>float, default=1</em>) – the initial value for epsilon</p></li>
+<li><p><strong>start_epsilon</strong> (<em>float, default=1</em>) – the initial value for epsilon</p></li>
 </ul>
 </dd>
 <dt class="field-even">Variables</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>stateDict</strong> (<em>dict</em>) – The dictionar that stores Q values</p></li>
+<li><p><strong>state_dict</strong> (<em>dict</em>) – The dictionary that stores Q values</p></li>
 <li><p><strong>GAMMA</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>]</em>) – the gamma value for training</p></li>
 <li><p><strong>STEP</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>]</em>) – the step size</p></li>
-<li><p><strong>EPSILON</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>]</em>) – the epsilon value for epsilon-greedy</p></li>
+<li><p><strong>epsilon</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>]</em>) – the epsilon value for epsilon-greedy</p></li>
 <li><p><strong>DECAY</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>)</em>) – the decay rate for epsilon</p></li>
 <li><p><strong>MIN_EPSILON</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>]</em>) – the minimum value for epsilon when decaying</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="snakeai.agents.tabular_agent.StateAgent.defaultValue">
-<span class="sig-name descname"><span class="pre">defaultValue</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.tabular_agent.StateAgent.defaultValue" title="Permalink to this definition">¶</a></dt>
-<dd><p>The default Value for the Q</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakeai.agents.tabular_agent.StateAgent.DECAY">
+<span class="sig-name descname"><span class="pre">DECAY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0.999</span></em><a class="headerlink" href="#snakeai.agents.tabular_agent.StateAgent.DECAY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakeai.agents.tabular_agent.StateAgent.GAMMA">
+<span class="sig-name descname"><span class="pre">GAMMA</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0.995</span></em><a class="headerlink" href="#snakeai.agents.tabular_agent.StateAgent.GAMMA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakeai.agents.tabular_agent.StateAgent.MIN_EPSILON">
+<span class="sig-name descname"><span class="pre">MIN_EPSILON</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0.01</span></em><a class="headerlink" href="#snakeai.agents.tabular_agent.StateAgent.MIN_EPSILON" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakeai.agents.tabular_agent.StateAgent.STEP">
+<span class="sig-name descname"><span class="pre">STEP</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0.6</span></em><a class="headerlink" href="#snakeai.agents.tabular_agent.StateAgent.STEP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="snakeai.agents.tabular_agent.StateAgent.default_value">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">default_value</span></span><a class="headerlink" href="#snakeai.agents.tabular_agent.StateAgent.default_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>The default Value for Q</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>The default value</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>list(float)</p>
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="snakeai.agents.tabular_agent.StateAgent.execute">
-<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.tabular_agent.StateAgent.execute" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.memento.html#snakeai.game.memento.FrozenState" title="snakeai.game.memento.FrozenState"><span class="pre">snakeai.game.memento.FrozenState</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="snakeai.game.constants.html#snakeai.game.constants.Actions" title="snakeai.game.constants.Actions"><span class="pre">snakeai.game.constants.Actions</span></a></span></span><a class="headerlink" href="#snakeai.agents.tabular_agent.StateAgent.execute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the next action to do, given the state</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -279,7 +307,7 @@ States are representeed as a string with all the positions of the snake plus the
 
 <dl class="py method">
 <dt class="sig sig-object py" id="snakeai.agents.tabular_agent.StateAgent.fit">
-<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oldState</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rew</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">done</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.tabular_agent.StateAgent.fit" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oldState</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.memento.html#snakeai.game.memento.FrozenState" title="snakeai.game.memento.FrozenState"><span class="pre">snakeai.game.memento.FrozenState</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.constants.html#snakeai.game.constants.Actions" title="snakeai.game.constants.Actions"><span class="pre">snakeai.game.constants.Actions</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rew</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.memento.html#snakeai.game.memento.FrozenState" title="snakeai.game.memento.FrozenState"><span class="pre">snakeai.game.memento.FrozenState</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">done</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.tabular_agent.StateAgent.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Update the Q values</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -296,14 +324,11 @@ States are representeed as a string with all the positions of the snake plus the
 
 <dl class="py method">
 <dt class="sig sig-object py" id="snakeai.agents.tabular_agent.StateAgent.load">
-<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'StateAgentDictionary'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.tabular_agent.StateAgent.load" title="Permalink to this definition">¶</a></dt>
-<dd><p>Loads the states of the agent</p>
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#snakeai.agents.tabular_agent.StateAgent" title="snakeai.agents.tabular_agent.StateAgent"><span class="pre">snakeai.agents.tabular_agent.StateAgent</span></a></span></span><a class="headerlink" href="#snakeai.agents.tabular_agent.StateAgent.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new agent from the given file</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>title</strong> (<em>str, default=StateAgentDictionary</em>) – the name of the file to be loaded</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>TypeError</strong> – If the data in the file is not a dict or a defauldict</p>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>TypeError</strong> – If the data in the file is not a dict or defaultdict</p>
 </dd>
 </dl>
 </dd></dl>
@@ -316,11 +341,11 @@ States are representeed as a string with all the positions of the snake plus the
 
 <dl class="py method">
 <dt class="sig sig-object py" id="snakeai.agents.tabular_agent.StateAgent.save">
-<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'StateAgentDictionary'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.tabular_agent.StateAgent.save" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save the states of the agent</p>
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.tabular_agent.StateAgent.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the states of the agent. If a path is not given, uses a default one.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>title</strong> (<em>str, default=StateAgentDictionary</em>) – the name of the file to be saved</p>
+<dd class="field-odd"><p><strong>model_path</strong> (<em>str, optional</em>) – the position where the agent must be saved</p>
 </dd>
 </dl>
 </dd></dl>
@@ -337,7 +362,7 @@ States are representeed as a string with all the positions of the snake plus the
               <div class='prev-next-bottom'>
                 
     <a class='left-prev' id="prev-link" href="snakeai.agents.recursive_agent.html" title="previous page">snakeai.agent.recursive_agent module</a>
-    <a class='right-next' id="next-link" href="snakeai.game.html" title="next page">snakeai.game package</a>
+    <a class='right-next' id="next-link" href="snakeai.agents.copy_agent.html" title="next page">snakeai.agent.copy_agent module</a>
 
               </div>
               

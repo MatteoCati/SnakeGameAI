@@ -1,6 +1,9 @@
 snakeai.game.view module
 =========================
 
+Generate a View
+----------------
+.. autofunction:: snakeai.game.view.generate_view
 
 GeneralView
 ------------
@@ -16,9 +19,9 @@ GameGUI
    :undoc-members:
    :show-inheritance:
 
-cliGUI
+CliGUI
 ------
-.. autoclass:: snakeai.game.view.cliGUI
+.. autoclass:: snakeai.game.view.CliGUI
    :members:
    :undoc-members:
    :show-inheritance:

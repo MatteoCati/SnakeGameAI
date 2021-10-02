@@ -1,14 +1,13 @@
-from snakeai.agents.copy_agent import DQN
+from snakeai.agents.simple_deep_agent import DQN
 from snakeai.game.agent_controller import AgentGame
 from collections import deque
 from tqdm import tqdm
 import matplotlib.pyplot as plt
-from tensorflow.keras.models import load_model
 
-def train(episodes, size):
-    """Train a StateAgent
+def train(episodes, size, show = False) -> DQN:
+    """Train a `DQN` agent
     
-    This mehod will train a StateAgent for a certain amount of steps. 
+    This method will train a StateAgent for a certain amount of steps.
     Then it will print some stats about it. The agent will be returned by the function. The 
     states are not saved on a file.
     
@@ -23,10 +22,10 @@ def train(episodes, size):
     scores = deque(maxlen=20)
     avgs = list()
     t = tqdm(range(episodes))
-    game = AgentGame(size,show=True, fps =20, replayAllowed=False)
+    game = AgentGame(size, show=show, fps=20, replay_allowed=False)
     for i in t:
         game.play(agent)
-        scores.append((game.model.score))
+        scores.append(game.model.score)
         maxScore = max(maxScore, game.model.score)
         t.set_postfix_str(f"HS: {maxScore}, avg: {sum(scores)/len(scores):.2f}")
         avgs.append(sum(scores)/len(scores))
@@ -38,12 +37,20 @@ def train(episodes, size):
     plt.show()
     return agent
 
-if __name__ == "__main__":
-    import os
-    #agent = train(60, 20)
-    path = os.path.abspath(".\\models\\deepCopiedModel")
-    agent = DQN(20)
-    agent.model = load_model(path)
-    game = AgentGame(20, replayAllowed=True)
+def  play(model_path = None, fps = 5):
+    """Play with an already trained `DQN`
+
+    If no path is given, a default (pre-trained) model will be used
+
+    Parameters
+    ------------
+    model_path: str, optional
+        the path to the trained model to load
+    """
+    if not model_path:
+        model_path = ".\\models\\deepCopiedModel"
+    size = 12
+    agent = DQN.load(size, model_path)
+    game = AgentGame(size, replay_allowed=True, fps=fps)
     agent.epsilon = 0
     game.play(agent)

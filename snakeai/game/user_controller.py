@@ -1,11 +1,14 @@
-from snakeai.game.view import GameGUI, cliGUI
-from snakeai.game.model import Snake
-from snakeai.game.constants import Actions
+import logging
+import sys
 import time
 
-class UserGame():
+from snakeai.game.constants import GUIMode
+from snakeai.game.view import generate_view
+from snakeai.game.model import Snake
+
+class UserGame:
     """The class for controlling the game when played by the user
-    
+
     Parameters
     --------------
     dim : int, default=20
@@ -20,68 +23,67 @@ class UserGame():
         The model for the game
     view : GameGUI
         The GUI for the game
-    frameTime : float
+    frame_time : float
         The duration of each frame in seconds
-    toInit : bool
+    is_first_game : bool
         Whether the GUI should be initialized
     """
-    def __init__(self, dim = 20, fps = 3, mode="window"):
+    def __init__(self, dim: int = 20, fps: int = 3, mode: GUIMode = GUIMode.WINDOW):
         self.model = Snake(dim)
-        if mode == "cli":
-            self.view = cliGUI()
-        else:
-            self.view = GameGUI()
-        self.frameTime = 1/fps
-        self.toInit = True
-    
+        self.view = generate_view(mode)
+        self.frame_time = 1 / fps
+        self.is_first_game = True
+
+    def wait_end_of_frame(self, elapsed: float):
+        """Wait until the time elapsed is at least `frame_time`"""
+        time.sleep(max(0.0, self.frame_time - (elapsed)))
+
     def start(self):
         """Start the game"""
         start = time.time()
         self.model.reset()
-        if self.toInit:
-            self.toInit = False
-            self.view.initScreen(self.model.dim, self.model.snake, self.model.apple, self.model.score, self.model.highScore)
+        if self.is_first_game:
+            self.is_first_game = False
+            self.view.initScreen(self.model.dim, self.model.snake, self.model.apple,
+                self.model.score, self.model.highScore)
         else:
-            self.view.updateUI(self.model.snake, self.model.apple, self.model.score, self.model.highScore)
-        time.sleep(max(0, self.frameTime - (time.time()-start)))
-    
+            self.view.updateUI(self.model.snake, self.model.apple, self.model.score,
+                self.model.highScore)
+        self.wait_end_of_frame(time.time()-start)
+
     def quit(self):
-        """Quit the game"""
+        """Quit the game and close the program"""
         self.view.quit()
-    
+        sys.exit()
+
     def waitForQuit(self):
-        """Wait until the game can be quitted"""
-        a = ""
+        """Wait until the user decide to quit"""
         while True:
-            a = self.view.getInput()
-            if a == "QUIT":
+            action = self.view.getInput()
+            if action == "QUIT":
                 self.quit()
-                print("quitting")
                 return
-            elif a == "REPLAY":
+            if action == "REPLAY":
                 self.play()
-    
+
     def step(self):
         """Execute one step (frame) of the game"""
         start = time.time()
         act = self.view.getInput()
         if act == "QUIT":
             self.quit()
-            
         if act and act != "REPLAY":
             self.model.changeDirection(act)
         self.model.step()
-        self.view.updateUI(self.model.snake, self.model.apple, self.model.score, self.model.highScore, self.model.isGameOver)
-        time.sleep(max(0, self.frameTime - (time.time()-start)))
-    
+        self.view.updateUI(self.model.snake, self.model.apple, self.model.score,
+            self.model.highScore, self.model.isGameOver)
+        self.wait_end_of_frame(time.time() - start)
+
     def play(self):
         """Play a complete game"""
         self.start()
         while not self.model.isGameOver:
             self.step()
-        self.view.updateUI(self.model.snake, self.model.apple, self.model.score, self.model.highScore, self.model.isGameOver)
+        self.view.updateUI(self.model.snake, self.model.apple, self.model.score,
+            self.model.highScore, self.model.isGameOver)
         self.waitForQuit()
-
-    
-
-

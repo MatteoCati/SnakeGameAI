@@ -22,3 +22,10 @@ Rewards
    :members:
    :undoc-members:
    :show-inheritance:
+
+GUIMode
+---------
+.. autoclass:: snakeai.game.constants.GUIMode
+   :members:
+   :undoc-members:
+   :show-inheritance:

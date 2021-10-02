@@ -127,6 +127,11 @@
      snakeai.agent.tabular_agent module
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.agents.copy_agent.html">
+     snakeai.agent.copy_agent module
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -162,6 +167,11 @@
    <li class="toctree-l2">
     <a class="reference internal" href="snakeai.game.view.html">
      snakeai.game.view module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.game.memento.html">
+     snakeai.game.memento module
     </a>
    </li>
   </ul>
@@ -223,7 +233,7 @@
 <h2>Recursive<a class="headerlink" href="#recursive" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="snakeai.agents.recursive_agent.Recursive">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.agents.recursive_agent.</span></span><span class="sig-name descname"><span class="pre">Recursive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxDepth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.recursive_agent.Recursive" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.agents.recursive_agent.</span></span><span class="sig-name descname"><span class="pre">Recursive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxDepth</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.recursive_agent.Recursive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="snakeai.agents.agent_interface.html#snakeai.agents.agent_interface.AbstractAgent" title="snakeai.agents.agent_interface.AbstractAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">snakeai.agents.agent_interface.AbstractAgent</span></code></a></p>
 <p>A Class for an agent that uses recursion</p>
 <p>The agent will find the best move by simulating <cite>maxDepth</cite> steps in all directions
@@ -245,7 +255,7 @@ and choosing the path with the best cumulative reward</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="snakeai.agents.recursive_agent.Recursive.execute">
-<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.recursive_agent.Recursive.execute" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.memento.html#snakeai.game.memento.FrozenState" title="snakeai.game.memento.FrozenState"><span class="pre">snakeai.game.memento.FrozenState</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="snakeai.game.constants.html#snakeai.game.constants.Actions" title="snakeai.game.constants.Actions"><span class="pre">snakeai.game.constants.Actions</span></a></span></span><a class="headerlink" href="#snakeai.agents.recursive_agent.Recursive.execute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the next action to do, given the state</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -262,14 +272,26 @@ and choosing the path with the best cumulative reward</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="snakeai.agents.recursive_agent.Recursive.fit">
-<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oldState</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rew</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">done</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.recursive_agent.Recursive.fit" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oldState</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.memento.html#snakeai.game.memento.FrozenState" title="snakeai.game.memento.FrozenState"><span class="pre">snakeai.game.memento.FrozenState</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.constants.html#snakeai.game.constants.Actions" title="snakeai.game.constants.Actions"><span class="pre">snakeai.game.constants.Actions</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rew</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.memento.html#snakeai.game.memento.FrozenState" title="snakeai.game.memento.FrozenState"><span class="pre">snakeai.game.memento.FrozenState</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">done</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.recursive_agent.Recursive.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>This agent does not need to train, so this method does nothing</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakeai.agents.recursive_agent.Recursive.load">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.recursive_agent.Recursive.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>This agent does not save anything. If the method is called, it raises a NotImplementedError</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="snakeai.agents.recursive_agent.Recursive.reset">
 <span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.recursive_agent.Recursive.reset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prepare agent for starting a new game</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakeai.agents.recursive_agent.Recursive.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.recursive_agent.Recursive.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>This agent cannot be saved. If the method is called, it raises a NotImplementedError</p>
 </dd></dl>
 
 </dd></dl>
