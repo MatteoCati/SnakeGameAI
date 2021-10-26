@@ -1,39 +1,22 @@
 snakeai.tests package
-=====================
+======================
 
-Submodules
-----------
+testagentcontroller module
+----------------------------
+.. automodule:: snakeai.tests.testagentcontroller
+   :annotation:
 
-snakeai.tests.testgame module
------------------------------
+testcligame module
+--------------------
+.. automodule:: snakeai.tests.testcligame
+   :members:
 
+testgame module
+----------------
 .. automodule:: snakeai.tests.testgame
    :members:
-   :undoc-members:
-   :show-inheritance:
 
-snakeai.tests.testrecursive module
-------------------------------------
-
-.. automodule:: snakeai.tests.testrecursive
+testview module
+------------------
+.. automodule:: snakeai.tests.testview
    :members:
-   :undoc-members:
-   :show-inheritance:
-
-snakeai.tests.teststateagent module
------------------------------
-
-.. automodule:: snakeai.tests.teststateagent
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-snakeai.tests.testcopied module
------------------------------
-
-.. automodule:: snakeai.tests.testcopied
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-

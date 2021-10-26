@@ -6,4 +6,4 @@ snakeai
 
    snakeai.agents
    snakeai.game
-   snakeai.tests
+   snakeai.utils

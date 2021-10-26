@@ -1,10 +1,28 @@
 import random
-from typing import List, Tuple
+from typing import Tuple
 
 from snakeai.agents.agent_interface import AbstractAgent
-from snakeai.game.constants import Actions, Rewards, Coords
+from snakeai.game.constants import Actions, Rewards
 from snakeai.game.memento import FrozenState
 from snakeai.game.model import Snake
+from snakeai.game.agent_controller import AgentGame
+
+
+def play(dim: int = 12, recursion_depth: int = 5, fps: int = 7):
+    """Play with  a recursive agent
+
+    Parameters
+    ----------
+    dim : int, default=12
+        the side of the board
+    recursion_depth : int, default=12
+        the number of recursive steps
+    fps : int, default=7
+        the number of frames per second
+    """
+    agent = Recursive(dim, recursion_depth)
+    game = AgentGame(dim, fps=fps, replay_allowed=True)
+    game.play(agent)
 
 
 class Recursive(AbstractAgent):
@@ -17,44 +35,44 @@ class Recursive(AbstractAgent):
     --------------
     dim : int
         the side of the board
-    maxDepth : int, default=5
+    max_depth : int, default=5
         the maximum depth for the recursion
 
     Attributes
     ------------
     dim : int
         the side of the board
-    maxDepth : int
+    max_depth : int
         the maximum depth for the recursion
     gamma : float [0;1]
         the discount factor for the recursion
     """
 
-    def __init__(self, dim: int, maxDepth: int=5):
+    def __init__(self, dim: int, max_depth: int = 5):
         super().__init__(dim)
-        self.maxDepth = maxDepth
+        self.max_depth = max_depth
         self.gamma = 0.75
 
-    def _recursion(self, original: List[Coords], depth: int)-> Tuple[int, Actions]:
-        bestActions = []
+    def _recursion(self, original: Snake, depth: int) -> Tuple[int, Actions]:
+        best_actions = []
         best = -10000
         for act in Actions:
             sim = Snake(self.dim)
             sim.snake = original.snake
             sim.apple = original.apple
             sim.direction = original.direction
-            sim.changeDirection(act)
+            sim.change_direction(act)
             rew = sim.step()
-            nextRew = rew.value
-            if not Rewards.isGameOver(rew) and depth < self.maxDepth:
+            next_reward = rew.value
+            if not Rewards.is_game_over(rew) and depth < self.max_depth:
                 rew2, _ = self._recursion(sim, depth + 1)
-                nextRew += rew2 * self.gamma
-            if best < nextRew:
-                best = nextRew
-                bestActions = [act]
-            elif best == nextRew:
-                bestActions.append(act)
-        return best, random.choice(bestActions)
+                next_reward += rew2 * self.gamma
+            if best < next_reward:
+                best = next_reward
+                best_actions = [act]
+            elif best == next_reward:
+                best_actions.append(act)
+        return best, random.choice(best_actions)
 
     def execute(self, state: FrozenState) -> Actions:
         """Get the next action to do, given the state
@@ -76,7 +94,7 @@ class Recursive(AbstractAgent):
         _, direction = self._recursion(original, 1)
         return direction
 
-    def fit(self, oldState: FrozenState, action: Actions, rew: int, state: FrozenState, done: bool):
+    def fit(self, old_state: FrozenState, action: Actions, rew: int, state: FrozenState, done: bool):
         """This agent does not need to train, so this method does nothing"""
 
     @classmethod

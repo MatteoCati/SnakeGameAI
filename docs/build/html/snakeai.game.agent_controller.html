@@ -128,8 +128,18 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="snakeai.agents.copy_agent.html">
-     snakeai.agent.copy_agent module
+    <a class="reference internal" href="snakeai.agents.simple_deep_agent.html">
+     snakeai.agent.simple_deep_agent module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.agents.simple_tabular_agent.html">
+     snakeai.agent.simple_tabular_agent module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.agents.simple_mc_agent.html">
+     snakeai.agent.simple_mc_agent module
     </a>
    </li>
   </ul>
@@ -176,10 +186,27 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="snakeai.tests.html">
-   snakeai.tests package
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="snakeai.utils.html">
+   snakeai.utils package
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.utils.train.html">
+     snakeai.utils.train module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.utils.graphs.html">
+     snakeai.utils.graphs module
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -233,7 +260,7 @@
 <h2>AgentGame<a class="headerlink" href="#agentgame" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="snakeai.game.agent_controller.AgentGame">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.game.agent_controller.</span></span><span class="sig-name descname"><span class="pre">AgentGame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replay_allowed</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.constants.html#snakeai.game.constants.GUIMode" title="snakeai.game.constants.GUIMode"><span class="pre">snakeai.game.constants.GUIMode</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">GUIMode.WINDOW</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.agent_controller.AgentGame" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.game.agent_controller.</span></span><span class="sig-name descname"><span class="pre">AgentGame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replay_allowed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">GUIMode.WINDOW</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.agent_controller.AgentGame" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="snakeai.game.user_controller.html#snakeai.game.user_controller.UserGame" title="snakeai.game.user_controller.UserGame"><code class="xref py py-class docutils literal notranslate"><span class="pre">snakeai.game.user_controller.UserGame</span></code></a></p>
 <p>The class for controlling the game when played by an agent</p>
 <dl class="field-list simple">
@@ -241,7 +268,7 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>dim</strong> (<em>int, default=20</em>) – the side of the board</p></li>
 <li><p><strong>fps</strong> (<em>int, default=7</em>) – the number of fps</p></li>
-<li><p><strong>show</strong> (<em>bool, deafault=True</em>) – Whether to show the GUI or not</p></li>
+<li><p><strong>show</strong> (<em>bool, default=True</em>) – Whether to show the GUI or not</p></li>
 <li><p><strong>replay_allowed</strong> (<em>Bool, default=False</em>) – whether the game should wait for replay after game over</p></li>
 <li><p><strong>mode</strong> (<em>GuiMode, default=GUIMode.WINDOW</em>) – The type of interface</p></li>
 </ul>
@@ -258,11 +285,11 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="snakeai.game.agent_controller.AgentGame.play">
-<span class="sig-name descname"><span class="pre">play</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.agents.agent_interface.html#snakeai.agents.agent_interface.AbstractAgent" title="snakeai.agents.agent_interface.AbstractAgent"><span class="pre">snakeai.agents.agent_interface.AbstractAgent</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.agent_controller.AgentGame.play" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">play</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.agent_controller.AgentGame.play" title="Permalink to this definition">¶</a></dt>
 <dd><p>Play a complete game</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>agent</strong> (<em>AbstractAgent</em>)</p>
+<dd class="field-odd"><p><strong>agent</strong> (<em>AbstractAgent</em>) – The agent that will play</p>
 </dd>
 </dl>
 </dd></dl>
@@ -275,7 +302,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="snakeai.game.agent_controller.AgentGame.start">
-<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="snakeai.game.memento.html#snakeai.game.memento.FrozenState" title="snakeai.game.memento.FrozenState"><span class="pre">snakeai.game.memento.FrozenState</span></a></span></span><a class="headerlink" href="#snakeai.game.agent_controller.AgentGame.start" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.agent_controller.AgentGame.start" title="Permalink to this definition">¶</a></dt>
 <dd><p>Start the game</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -289,7 +316,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="snakeai.game.agent_controller.AgentGame.step">
-<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="snakeai.game.constants.html#snakeai.game.constants.Actions" title="snakeai.game.constants.Actions"><span class="pre">snakeai.game.constants.Actions</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.agent_controller.AgentGame.step" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.agent_controller.AgentGame.step" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute one step (frame) of the game</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -308,15 +335,20 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="snakeai.game.agent_controller.AgentGame.waitForQuit">
-<span class="sig-name descname"><span class="pre">waitForQuit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.agent_controller.AgentGame.waitForQuit" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wait until the user decide to quit</p>
+<dt class="sig sig-object py" id="snakeai.game.agent_controller.AgentGame.wait_end_of_frame">
+<span class="sig-name descname"><span class="pre">wait_end_of_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elapsed</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.agent_controller.AgentGame.wait_end_of_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait until the time elapsed is at least <cite>frame_time</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>elapsed</strong> (<em>float</em>) – the time elapsed since the start of the current frame</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="snakeai.game.agent_controller.AgentGame.wait_end_of_frame">
-<span class="sig-name descname"><span class="pre">wait_end_of_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elapsed</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.agent_controller.AgentGame.wait_end_of_frame" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wait until the time elapsed is at least <cite>frame_time</cite></p>
+<dt class="sig sig-object py" id="snakeai.game.agent_controller.AgentGame.wait_for_quit">
+<span class="sig-name descname"><span class="pre">wait_for_quit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.game.agent_controller.AgentGame.wait_for_quit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait until the user decide to quit</p>
 </dd></dl>
 
 </dd></dl>

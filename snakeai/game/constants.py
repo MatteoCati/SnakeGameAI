@@ -2,6 +2,7 @@ from enum import Enum, auto
 import math
 from dataclasses import dataclass
 
+
 @dataclass
 class Coords:
     """A class for representing coordinates
@@ -22,8 +23,8 @@ class Coords:
     y : int
         The y coordinate
     """
-    x : int
-    y : int
+    x: int
+    y: int
 
     def __add__(self, other: 'Coords') -> 'Coords':
         if not isinstance(other, Coords):
@@ -75,12 +76,14 @@ class Coords:
             raise TypeError("It is not a Coord object")
         return math.sqrt((self.x-other.x)**2 + (self.y-other.y)**2)
 
+
 class Actions(Enum):
     """The actions that can be chosen to move the snake"""
     UP = Coords(0, -1)
     DOWN = Coords(0, 1)
     LEFT = Coords(-1, 0)
     RIGHT = Coords(1, 0)
+
 
 class Rewards(Enum):
     """The possible rewards values
@@ -94,8 +97,8 @@ class Rewards(Enum):
     AWAY = -1
 
     @classmethod
-    def isGameOver(cls, rew: 'Rewards') -> bool:
-        """Check if a reward is considered game over
+    def is_game_over(cls, rew: 'Rewards') -> bool:
+        """Check if a reward is given at game over
 
         Parameters
         ------------
@@ -108,6 +111,7 @@ class Rewards(Enum):
             Whether is game over or not
         """
         return rew in [cls.FAILED, cls.ENDED]
+
 
 class GUIMode(Enum):
     """How the GUI should be displayed"""

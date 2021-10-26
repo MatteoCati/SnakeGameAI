@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>snakeai.agent.copy_agent module &#8212; SnakeAI 1.0 documentation</title>
+    <title>snakeai.agent.simple_deep_agent module &#8212; SnakeAI 1.0 documentation</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -129,7 +129,7 @@
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     snakeai.agent.copy_agent module
+     snakeai.agent.simple_deep_agent module
     </a>
    </li>
   </ul>
@@ -227,13 +227,13 @@
               
               <div>
                 
-  <div class="section" id="snakeai-agent-copy-agent-module">
-<h1>snakeai.agent.copy_agent module<a class="headerlink" href="#snakeai-agent-copy-agent-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="snakeai-agent-simple-deep-agent-module">
+<h1>snakeai.agent.simple_deep_agent module<a class="headerlink" href="#snakeai-agent-simple-deep-agent-module" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="dqn">
 <h2>DQN<a class="headerlink" href="#dqn" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="snakeai.agents.copy_agent.DQN">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.agents.copy_agent.</span></span><span class="sig-name descname"><span class="pre">DQN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.copy_agent.DQN" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="snakeai.agents.simple_deep_agent.DQN">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.agents.simple_deep_agent.</span></span><span class="sig-name descname"><span class="pre">DQN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.simple_deep_agent.DQN" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="snakeai.agents.agent_interface.html#snakeai.agents.agent_interface.AbstractAgent" title="snakeai.agents.agent_interface.AbstractAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">snakeai.agents.agent_interface.AbstractAgent</span></code></a></p>
 <p>An agent that uses deep learning, using a simplified description of the state</p>
 <dl class="field-list simple">
@@ -244,25 +244,35 @@
 <dd class="field-even"><ul class="simple">
 <li><p><strong>dim</strong> (<em>int</em>) – the size of the board (side length)</p></li>
 <li><p><strong>epsilon</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>]</em>) – The current epsilon value</p></li>
-<li><p><strong>gamma</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>]</em>) – The discount factor</p></li>
+<li><p><strong>GAMMA</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>]</em>) – The discount factor</p></li>
 <li><p><strong>batch_size</strong> (<em>int</em>) – The dimension of each batch for training</p></li>
-<li><p><strong>epsilon_min</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>]</em>) – The minimum value for epsilon</p></li>
-<li><p><strong>epsilon_decay</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>)</em>) – The decay factor of epsilon at each episode</p></li>
+<li><p><strong>MIN_EPSILON</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>]</em>) – The minimum value for epsilon</p></li>
+<li><p><strong>EPSILON_DECAY</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>)</em>) – The decay factor of epsilon at each episode</p></li>
 <li><p><strong>learning_rate</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>]</em>) – The learning rate</p></li>
 <li><p><strong>memory</strong> (<em>deque</em>) – The list of states used for learning</p></li>
-<li><p><strong>model</strong> (<em>keras.Model</em>) – The model used by the agent</p></li>
+<li><p><strong>model</strong> (<em>keras.Model</em>) – The neural network used by the agent</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakeai.agents.simple_deep_agent.DQN.EPSILON_DECAY">
+<span class="sig-name descname"><span class="pre">EPSILON_DECAY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0.995</span></em><a class="headerlink" href="#snakeai.agents.simple_deep_agent.DQN.EPSILON_DECAY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakeai.agents.simple_deep_agent.DQN.GAMMA">
+<span class="sig-name descname"><span class="pre">GAMMA</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0.95</span></em><a class="headerlink" href="#snakeai.agents.simple_deep_agent.DQN.GAMMA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
-<dt class="sig sig-object py" id="snakeai.agents.copy_agent.DQN.build_model">
-<span class="sig-name descname"><span class="pre">build_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">keras.engine.training.Model</span></span></span><a class="headerlink" href="#snakeai.agents.copy_agent.DQN.build_model" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="snakeai.agents.simple_deep_agent.DQN.build_model">
+<span class="sig-name descname"><span class="pre">build_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">keras.engine.training.Model</span></span></span><a class="headerlink" href="#snakeai.agents.simple_deep_agent.DQN.build_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create The Deep Learning model</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="snakeai.agents.copy_agent.DQN.execute">
-<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.memento.html#snakeai.game.memento.FrozenState" title="snakeai.game.memento.FrozenState"><span class="pre">snakeai.game.memento.FrozenState</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="snakeai.game.constants.html#snakeai.game.constants.Actions" title="snakeai.game.constants.Actions"><span class="pre">snakeai.game.constants.Actions</span></a></span></span><a class="headerlink" href="#snakeai.agents.copy_agent.DQN.execute" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="snakeai.agents.simple_deep_agent.DQN.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.memento.html#snakeai.game.memento.FrozenState" title="snakeai.game.memento.FrozenState"><span class="pre">snakeai.game.memento.FrozenState</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="snakeai.game.constants.html#snakeai.game.constants.Actions" title="snakeai.game.constants.Actions"><span class="pre">snakeai.game.constants.Actions</span></a></span></span><a class="headerlink" href="#snakeai.agents.simple_deep_agent.DQN.execute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the next action to do, given the state
 :Parameters: <strong>state</strong> (<em>FrozenState</em>) – The current state of the game</p>
 <dl class="field-list simple">
@@ -276,13 +286,13 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="snakeai.agents.copy_agent.DQN.fit">
-<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oldState</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.memento.html#snakeai.game.memento.FrozenState" title="snakeai.game.memento.FrozenState"><span class="pre">snakeai.game.memento.FrozenState</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.constants.html#snakeai.game.constants.Actions" title="snakeai.game.constants.Actions"><span class="pre">snakeai.game.constants.Actions</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rew</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.memento.html#snakeai.game.memento.FrozenState" title="snakeai.game.memento.FrozenState"><span class="pre">snakeai.game.memento.FrozenState</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">done</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.copy_agent.DQN.fit" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="snakeai.agents.simple_deep_agent.DQN.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">old_state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.memento.html#snakeai.game.memento.FrozenState" title="snakeai.game.memento.FrozenState"><span class="pre">snakeai.game.memento.FrozenState</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.constants.html#snakeai.game.constants.Actions" title="snakeai.game.constants.Actions"><span class="pre">snakeai.game.constants.Actions</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rew</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.memento.html#snakeai.game.memento.FrozenState" title="snakeai.game.memento.FrozenState"><span class="pre">snakeai.game.memento.FrozenState</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">done</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.simple_deep_agent.DQN.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add the current step to the memory and train the model</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>oldState</strong> (<em>FrozenState</em>) – The state of the game before taking the action</p></li>
+<li><p><strong>old_state</strong> (<em>FrozenState</em>) – The state of the game before taking the action</p></li>
 <li><p><strong>action</strong> (<em>Actions</em>) – The action chosen</p></li>
 <li><p><strong>rew</strong> (<em>int</em>) – The reward obtained after taking the action</p></li>
 <li><p><strong>state</strong> (<em>FrozenState</em>) – The state after taking the action</p></li>
@@ -293,20 +303,20 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="snakeai.agents.copy_agent.DQN.load">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#snakeai.agents.copy_agent.DQN" title="snakeai.agents.copy_agent.DQN"><span class="pre">snakeai.agents.copy_agent.DQN</span></a></span></span><a class="headerlink" href="#snakeai.agents.copy_agent.DQN.load" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="snakeai.agents.simple_deep_agent.DQN.load">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#snakeai.agents.simple_deep_agent.DQN" title="snakeai.agents.simple_deep_agent.DQN"><span class="pre">snakeai.agents.simple_deep_agent.DQN</span></a></span></span><a class="headerlink" href="#snakeai.agents.simple_deep_agent.DQN.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new agent from the given file.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="snakeai.agents.copy_agent.DQN.replay">
-<span class="sig-name descname"><span class="pre">replay</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.copy_agent.DQN.replay" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="snakeai.agents.simple_deep_agent.DQN.replay">
+<span class="sig-name descname"><span class="pre">replay</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.simple_deep_agent.DQN.replay" title="Permalink to this definition">¶</a></dt>
 <dd><p>Train the model with one batch</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="snakeai.agents.copy_agent.DQN.save">
-<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.copy_agent.DQN.save" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="snakeai.agents.simple_deep_agent.DQN.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.simple_deep_agent.DQN.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save the model to a file. if no path is given, it uses a default one.</p>
 </dd></dl>
 

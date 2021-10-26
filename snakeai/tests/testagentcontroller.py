@@ -1,7 +1,8 @@
 from snakeai.game.agent_controller import AgentGame
 from snakeai.agents.agent_interface import AbstractAgent
 from snakeai.game.constants import Actions
-import time
+
+"""Use this mdule to check if AgentGame works correctly"""
 
 if __name__ =="__main__":
     class MockAgent(AbstractAgent):
@@ -18,12 +19,14 @@ if __name__ =="__main__":
         
         def execute(self, state) -> Actions:
             return Actions.RIGHT
+
         @classmethod
         def load(cls, dim, model_path):
             pass
+
         def save(self, model_path = None):
             pass
         
     agent = MockAgent(20)
-    game = AgentGame(20, show = True, replay_allowed=True)
+    game = AgentGame(20, show=True, replay_allowed=True)
     game.play(agent)

@@ -165,7 +165,7 @@
 <h2 id="B">B</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="snakeai.agents.copy_agent.html#snakeai.agents.copy_agent.DQN.build_model">build_model() (snakeai.agents.copy_agent.DQN method)</a>
+      <li><a href="snakeai.agents.simple_deep_agent.html#snakeai.agents.simple_deep_agent.DQN.build_model">build_model() (snakeai.agents.simple_deep_agent.DQN method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -173,7 +173,7 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="snakeai.game.model.html#snakeai.game.model.Snake.changeDirection">changeDirection() (snakeai.game.model.Snake method)</a>
+      <li><a href="snakeai.game.model.html#snakeai.game.model.Snake.change_direction">change_direction() (snakeai.game.model.Snake method)</a>
 </li>
       <li><a href="snakeai.game.constants.html#snakeai.game.constants.GUIMode.CLI">CLI (snakeai.game.constants.GUIMode attribute)</a>
 </li>
@@ -191,17 +191,31 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="snakeai.agents.tabular_agent.html#snakeai.agents.tabular_agent.StateAgent.DECAY">DECAY (snakeai.agents.tabular_agent.StateAgent attribute)</a>
+      <li><a href="snakeai.agents.simple_mc_agent.html#snakeai.agents.simple_mc_agent.SimpleMCAgent.DECAY">DECAY (snakeai.agents.simple_mc_agent.SimpleMCAgent attribute)</a>
+
+      <ul>
+        <li><a href="snakeai.agents.simple_tabular_agent.html#snakeai.agents.simple_tabular_agent.SimpleStateAgent.DECAY">(snakeai.agents.simple_tabular_agent.SimpleStateAgent attribute)</a>
 </li>
-      <li><a href="snakeai.agents.tabular_agent.html#snakeai.agents.tabular_agent.StateAgent.default_value">default_value (snakeai.agents.tabular_agent.StateAgent property)</a>
+        <li><a href="snakeai.agents.tabular_agent.html#snakeai.agents.tabular_agent.StateAgent.DECAY">(snakeai.agents.tabular_agent.StateAgent attribute)</a>
 </li>
+      </ul></li>
+      <li><a href="snakeai.agents.simple_mc_agent.html#snakeai.agents.simple_mc_agent.SimpleMCAgent.default_count">default_count() (snakeai.agents.simple_mc_agent.SimpleMCAgent static method)</a>
+</li>
+      <li><a href="snakeai.agents.simple_tabular_agent.html#snakeai.agents.simple_tabular_agent.SimpleStateAgent.default_value">default_value (snakeai.agents.simple_tabular_agent.SimpleStateAgent property)</a>
+
+      <ul>
+        <li><a href="snakeai.agents.tabular_agent.html#snakeai.agents.tabular_agent.StateAgent.default_value">(snakeai.agents.tabular_agent.StateAgent property)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="snakeai.agents.simple_mc_agent.html#snakeai.agents.simple_mc_agent.SimpleMCAgent.default_value">default_value() (snakeai.agents.simple_mc_agent.SimpleMCAgent static method)</a>
+</li>
       <li><a href="snakeai.game.constants.html#snakeai.game.constants.Coords.distance">distance() (snakeai.game.constants.Coords method)</a>
 </li>
       <li><a href="snakeai.game.constants.html#snakeai.game.constants.Actions.DOWN">DOWN (snakeai.game.constants.Actions attribute)</a>
 </li>
-      <li><a href="snakeai.agents.copy_agent.html#snakeai.agents.copy_agent.DQN">DQN (class in snakeai.agents.copy_agent)</a>
+      <li><a href="snakeai.agents.simple_deep_agent.html#snakeai.agents.simple_deep_agent.DQN">DQN (class in snakeai.agents.simple_deep_agent)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -211,12 +225,18 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="snakeai.game.constants.html#snakeai.game.constants.Rewards.ENDED">ENDED (snakeai.game.constants.Rewards attribute)</a>
 </li>
+      <li><a href="snakeai.agents.simple_deep_agent.html#snakeai.agents.simple_deep_agent.DQN.EPSILON_DECAY">EPSILON_DECAY (snakeai.agents.simple_deep_agent.DQN attribute)</a>
+</li>
       <li><a href="snakeai.agents.agent_interface.html#snakeai.agents.agent_interface.AbstractAgent.execute">execute() (snakeai.agents.agent_interface.AbstractAgent method)</a>
 
       <ul>
-        <li><a href="snakeai.agents.copy_agent.html#snakeai.agents.copy_agent.DQN.execute">(snakeai.agents.copy_agent.DQN method)</a>
-</li>
         <li><a href="snakeai.agents.recursive_agent.html#snakeai.agents.recursive_agent.Recursive.execute">(snakeai.agents.recursive_agent.Recursive method)</a>
+</li>
+        <li><a href="snakeai.agents.simple_deep_agent.html#snakeai.agents.simple_deep_agent.DQN.execute">(snakeai.agents.simple_deep_agent.DQN method)</a>
+</li>
+        <li><a href="snakeai.agents.simple_mc_agent.html#snakeai.agents.simple_mc_agent.SimpleMCAgent.execute">(snakeai.agents.simple_mc_agent.SimpleMCAgent method)</a>
+</li>
+        <li><a href="snakeai.agents.simple_tabular_agent.html#snakeai.agents.simple_tabular_agent.SimpleStateAgent.execute">(snakeai.agents.simple_tabular_agent.SimpleStateAgent method)</a>
 </li>
         <li><a href="snakeai.agents.tabular_agent.html#snakeai.agents.tabular_agent.StateAgent.execute">(snakeai.agents.tabular_agent.StateAgent method)</a>
 </li>
@@ -232,9 +252,13 @@
       <li><a href="snakeai.agents.agent_interface.html#snakeai.agents.agent_interface.AbstractAgent.fit">fit() (snakeai.agents.agent_interface.AbstractAgent method)</a>
 
       <ul>
-        <li><a href="snakeai.agents.copy_agent.html#snakeai.agents.copy_agent.DQN.fit">(snakeai.agents.copy_agent.DQN method)</a>
-</li>
         <li><a href="snakeai.agents.recursive_agent.html#snakeai.agents.recursive_agent.Recursive.fit">(snakeai.agents.recursive_agent.Recursive method)</a>
+</li>
+        <li><a href="snakeai.agents.simple_deep_agent.html#snakeai.agents.simple_deep_agent.DQN.fit">(snakeai.agents.simple_deep_agent.DQN method)</a>
+</li>
+        <li><a href="snakeai.agents.simple_mc_agent.html#snakeai.agents.simple_mc_agent.SimpleMCAgent.fit">(snakeai.agents.simple_mc_agent.SimpleMCAgent method)</a>
+</li>
+        <li><a href="snakeai.agents.simple_tabular_agent.html#snakeai.agents.simple_tabular_agent.SimpleStateAgent.fit">(snakeai.agents.simple_tabular_agent.SimpleStateAgent method)</a>
 </li>
         <li><a href="snakeai.agents.tabular_agent.html#snakeai.agents.tabular_agent.StateAgent.fit">(snakeai.agents.tabular_agent.StateAgent method)</a>
 </li>
@@ -251,20 +275,30 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="snakeai.game.view.html#snakeai.game.view.GameGUI">GameGUI (class in snakeai.game.view)</a>
 </li>
-      <li><a href="snakeai.agents.tabular_agent.html#snakeai.agents.tabular_agent.StateAgent.GAMMA">GAMMA (snakeai.agents.tabular_agent.StateAgent attribute)</a>
+      <li><a href="snakeai.agents.simple_deep_agent.html#snakeai.agents.simple_deep_agent.DQN.GAMMA">GAMMA (snakeai.agents.simple_deep_agent.DQN attribute)</a>
+
+      <ul>
+        <li><a href="snakeai.agents.simple_mc_agent.html#snakeai.agents.simple_mc_agent.SimpleMCAgent.GAMMA">(snakeai.agents.simple_mc_agent.SimpleMCAgent attribute)</a>
 </li>
+        <li><a href="snakeai.agents.simple_tabular_agent.html#snakeai.agents.simple_tabular_agent.SimpleStateAgent.GAMMA">(snakeai.agents.simple_tabular_agent.SimpleStateAgent attribute)</a>
+</li>
+        <li><a href="snakeai.agents.tabular_agent.html#snakeai.agents.tabular_agent.StateAgent.GAMMA">(snakeai.agents.tabular_agent.StateAgent attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="snakeai.utils.train.html#snakeai.utils.train.general_train">general_train() (in module snakeai.utils.train)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="snakeai.game.view.html#snakeai.game.view.GeneralView">GeneralView (class in snakeai.game.view)</a>
 </li>
       <li><a href="snakeai.game.view.html#snakeai.game.view.generate_view">generate_view() (in module snakeai.game.view)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="snakeai.game.view.html#snakeai.game.view.CliGUI.getInput">getInput() (snakeai.game.view.CliGUI method)</a>
+      <li><a href="snakeai.game.view.html#snakeai.game.view.CliGUI.get_input">get_input() (snakeai.game.view.CliGUI method)</a>
 
       <ul>
-        <li><a href="snakeai.game.view.html#snakeai.game.view.GameGUI.getInput">(snakeai.game.view.GameGUI method)</a>
+        <li><a href="snakeai.game.view.html#snakeai.game.view.GameGUI.get_input">(snakeai.game.view.GameGUI method)</a>
 </li>
-        <li><a href="snakeai.game.view.html#snakeai.game.view.GeneralView.getInput">(snakeai.game.view.GeneralView method)</a>
+        <li><a href="snakeai.game.view.html#snakeai.game.view.GeneralView.get_input">(snakeai.game.view.GeneralView method)</a>
 </li>
       </ul></li>
       <li><a href="snakeai.game.constants.html#snakeai.game.constants.Rewards.GOT_APPLE">GOT_APPLE (snakeai.game.constants.Rewards attribute)</a>
@@ -277,17 +311,17 @@
 <h2 id="I">I</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="snakeai.game.view.html#snakeai.game.view.CliGUI.initScreen">initScreen() (snakeai.game.view.CliGUI method)</a>
+      <li><a href="snakeai.game.view.html#snakeai.game.view.CliGUI.init_screen">init_screen() (snakeai.game.view.CliGUI method)</a>
 
       <ul>
-        <li><a href="snakeai.game.view.html#snakeai.game.view.GameGUI.initScreen">(snakeai.game.view.GameGUI method)</a>
+        <li><a href="snakeai.game.view.html#snakeai.game.view.GameGUI.init_screen">(snakeai.game.view.GameGUI method)</a>
 </li>
-        <li><a href="snakeai.game.view.html#snakeai.game.view.GeneralView.initScreen">(snakeai.game.view.GeneralView method)</a>
+        <li><a href="snakeai.game.view.html#snakeai.game.view.GeneralView.init_screen">(snakeai.game.view.GeneralView method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="snakeai.game.constants.html#snakeai.game.constants.Rewards.isGameOver">isGameOver() (snakeai.game.constants.Rewards class method)</a>
+      <li><a href="snakeai.game.constants.html#snakeai.game.constants.Rewards.is_game_over">is_game_over() (snakeai.game.constants.Rewards class method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -300,9 +334,13 @@
       <li><a href="snakeai.agents.agent_interface.html#snakeai.agents.agent_interface.AbstractAgent.load">load() (snakeai.agents.agent_interface.AbstractAgent class method)</a>
 
       <ul>
-        <li><a href="snakeai.agents.copy_agent.html#snakeai.agents.copy_agent.DQN.load">(snakeai.agents.copy_agent.DQN class method)</a>
-</li>
         <li><a href="snakeai.agents.recursive_agent.html#snakeai.agents.recursive_agent.Recursive.load">(snakeai.agents.recursive_agent.Recursive class method)</a>
+</li>
+        <li><a href="snakeai.agents.simple_deep_agent.html#snakeai.agents.simple_deep_agent.DQN.load">(snakeai.agents.simple_deep_agent.DQN class method)</a>
+</li>
+        <li><a href="snakeai.agents.simple_mc_agent.html#snakeai.agents.simple_mc_agent.SimpleMCAgent.load">(snakeai.agents.simple_mc_agent.SimpleMCAgent class method)</a>
+</li>
+        <li><a href="snakeai.agents.simple_tabular_agent.html#snakeai.agents.simple_tabular_agent.SimpleStateAgent.load">(snakeai.agents.simple_tabular_agent.SimpleStateAgent class method)</a>
 </li>
         <li><a href="snakeai.agents.tabular_agent.html#snakeai.agents.tabular_agent.StateAgent.load">(snakeai.agents.tabular_agent.StateAgent class method)</a>
 </li>
@@ -315,19 +353,27 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="snakeai.game.constants.html#snakeai.game.constants.Coords.manhattan_distance">manhattan_distance() (snakeai.game.constants.Coords method)</a>
 </li>
-      <li><a href="snakeai.agents.tabular_agent.html#snakeai.agents.tabular_agent.StateAgent.MIN_EPSILON">MIN_EPSILON (snakeai.agents.tabular_agent.StateAgent attribute)</a>
+      <li><a href="snakeai.agents.agent_interface.html#snakeai.agents.agent_interface.AbstractAgent.MIN_EPSILON">MIN_EPSILON (snakeai.agents.agent_interface.AbstractAgent attribute)</a>
+
+      <ul>
+        <li><a href="snakeai.agents.recursive_agent.html#snakeai.agents.recursive_agent.Recursive.MIN_EPSILON">(snakeai.agents.recursive_agent.Recursive attribute)</a>
 </li>
+        <li><a href="snakeai.agents.simple_mc_agent.html#snakeai.agents.simple_mc_agent.SimpleMCAgent.MIN_EPSILON">(snakeai.agents.simple_mc_agent.SimpleMCAgent attribute)</a>
+</li>
+        <li><a href="snakeai.agents.simple_tabular_agent.html#snakeai.agents.simple_tabular_agent.SimpleStateAgent.MIN_EPSILON">(snakeai.agents.simple_tabular_agent.SimpleStateAgent attribute)</a>
+</li>
+        <li><a href="snakeai.agents.tabular_agent.html#snakeai.agents.tabular_agent.StateAgent.MIN_EPSILON">(snakeai.agents.tabular_agent.StateAgent attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     module
 
       <ul>
-        <li><a href="snakeai.tests.html#module-snakeai.tests.testcopied">snakeai.tests.testcopied</a>
+        <li><a href="snakeai.utils.graphs.html#module-snakeai.utils.graphs">snakeai.utils.graphs</a>
 </li>
-        <li><a href="snakeai.tests.html#module-snakeai.tests.testgame">snakeai.tests.testgame</a>
-</li>
-        <li><a href="snakeai.tests.html#module-snakeai.tests.testrecursive">snakeai.tests.testrecursive</a>
-</li>
-        <li><a href="snakeai.tests.html#module-snakeai.tests.teststateagent">snakeai.tests.teststateagent</a>
+        <li><a href="snakeai.utils.train.html#module-snakeai.utils.train">snakeai.utils.train</a>
 </li>
       </ul></li>
   </ul></td>
@@ -344,14 +390,16 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="snakeai.tests.html#snakeai.tests.testcopied.play">play() (in module snakeai.tests.testcopied)</a>
+      <li><a href="snakeai.agents.recursive_agent.html#snakeai.agents.recursive_agent.play">play() (in module snakeai.agents.recursive_agent)</a>
 
       <ul>
-        <li><a href="snakeai.tests.html#snakeai.tests.testgame.play">(in module snakeai.tests.testgame)</a>
+        <li><a href="snakeai.agents.simple_deep_agent.html#snakeai.agents.simple_deep_agent.play">(in module snakeai.agents.simple_deep_agent)</a>
 </li>
-        <li><a href="snakeai.tests.html#snakeai.tests.testrecursive.play">(in module snakeai.tests.testrecursive)</a>
+        <li><a href="snakeai.agents.simple_mc_agent.html#snakeai.agents.simple_mc_agent.play">(in module snakeai.agents.simple_mc_agent)</a>
 </li>
-        <li><a href="snakeai.tests.html#snakeai.tests.teststateagent.play">(in module snakeai.tests.teststateagent)</a>
+        <li><a href="snakeai.agents.simple_tabular_agent.html#snakeai.agents.simple_tabular_agent.play">(in module snakeai.agents.simple_tabular_agent)</a>
+</li>
+        <li><a href="snakeai.agents.tabular_agent.html#snakeai.agents.tabular_agent.play">(in module snakeai.agents.tabular_agent)</a>
 </li>
         <li><a href="snakeai.game.agent_controller.html#snakeai.game.agent_controller.AgentGame.play">(snakeai.game.agent_controller.AgentGame method)</a>
 </li>
@@ -382,12 +430,20 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="snakeai.agents.recursive_agent.html#snakeai.agents.recursive_agent.Recursive">Recursive (class in snakeai.agents.recursive_agent)</a>
 </li>
-      <li><a href="snakeai.agents.copy_agent.html#snakeai.agents.copy_agent.DQN.replay">replay() (snakeai.agents.copy_agent.DQN method)</a>
+      <li><a href="snakeai.agents.simple_deep_agent.html#snakeai.agents.simple_deep_agent.DQN.replay">replay() (snakeai.agents.simple_deep_agent.DQN method)</a>
+
+      <ul>
+        <li><a href="snakeai.agents.simple_mc_agent.html#snakeai.agents.simple_mc_agent.SimpleMCAgent.replay">(snakeai.agents.simple_mc_agent.SimpleMCAgent method)</a>
 </li>
+      </ul></li>
       <li><a href="snakeai.agents.agent_interface.html#snakeai.agents.agent_interface.AbstractAgent.reset">reset() (snakeai.agents.agent_interface.AbstractAgent method)</a>
 
       <ul>
         <li><a href="snakeai.agents.recursive_agent.html#snakeai.agents.recursive_agent.Recursive.reset">(snakeai.agents.recursive_agent.Recursive method)</a>
+</li>
+        <li><a href="snakeai.agents.simple_mc_agent.html#snakeai.agents.simple_mc_agent.SimpleMCAgent.reset">(snakeai.agents.simple_mc_agent.SimpleMCAgent method)</a>
+</li>
+        <li><a href="snakeai.agents.simple_tabular_agent.html#snakeai.agents.simple_tabular_agent.SimpleStateAgent.reset">(snakeai.agents.simple_tabular_agent.SimpleStateAgent method)</a>
 </li>
         <li><a href="snakeai.agents.tabular_agent.html#snakeai.agents.tabular_agent.StateAgent.reset">(snakeai.agents.tabular_agent.StateAgent method)</a>
 </li>
@@ -409,49 +465,47 @@
       <li><a href="snakeai.agents.agent_interface.html#snakeai.agents.agent_interface.AbstractAgent.save">save() (snakeai.agents.agent_interface.AbstractAgent method)</a>
 
       <ul>
-        <li><a href="snakeai.agents.copy_agent.html#snakeai.agents.copy_agent.DQN.save">(snakeai.agents.copy_agent.DQN method)</a>
-</li>
         <li><a href="snakeai.agents.recursive_agent.html#snakeai.agents.recursive_agent.Recursive.save">(snakeai.agents.recursive_agent.Recursive method)</a>
+</li>
+        <li><a href="snakeai.agents.simple_deep_agent.html#snakeai.agents.simple_deep_agent.DQN.save">(snakeai.agents.simple_deep_agent.DQN method)</a>
+</li>
+        <li><a href="snakeai.agents.simple_mc_agent.html#snakeai.agents.simple_mc_agent.SimpleMCAgent.save">(snakeai.agents.simple_mc_agent.SimpleMCAgent method)</a>
+</li>
+        <li><a href="snakeai.agents.simple_tabular_agent.html#snakeai.agents.simple_tabular_agent.SimpleStateAgent.save">(snakeai.agents.simple_tabular_agent.SimpleStateAgent method)</a>
 </li>
         <li><a href="snakeai.agents.tabular_agent.html#snakeai.agents.tabular_agent.StateAgent.save">(snakeai.agents.tabular_agent.StateAgent method)</a>
 </li>
       </ul></li>
-      <li><a href="snakeai.game.model.html#snakeai.game.model.Snake.setApple">setApple() (snakeai.game.model.Snake method)</a>
+      <li><a href="snakeai.game.model.html#snakeai.game.model.Snake.set_apple">set_apple() (snakeai.game.model.Snake method)</a>
 </li>
-      <li><a href="snakeai.game.memento.html#snakeai.game.memento.FrozenState.simpleState">simpleState (snakeai.game.memento.FrozenState property)</a>
+      <li><a href="snakeai.utils.graphs.html#snakeai.utils.graphs.show_graph">show_graph() (in module snakeai.utils.graphs)</a>
+</li>
+      <li><a href="snakeai.game.memento.html#snakeai.game.memento.FrozenState.simple_state">simple_state (snakeai.game.memento.FrozenState property)</a>
+</li>
+      <li><a href="snakeai.game.memento.html#snakeai.game.memento.FrozenState.simple_state_string">simple_state_string (snakeai.game.memento.FrozenState property)</a>
+</li>
+      <li><a href="snakeai.agents.simple_mc_agent.html#snakeai.agents.simple_mc_agent.SimpleMCAgent">SimpleMCAgent (class in snakeai.agents.simple_mc_agent)</a>
+</li>
+      <li><a href="snakeai.agents.simple_tabular_agent.html#snakeai.agents.simple_tabular_agent.SimpleStateAgent">SimpleStateAgent (class in snakeai.agents.simple_tabular_agent)</a>
 </li>
       <li><a href="snakeai.game.model.html#snakeai.game.model.Snake">Snake (class in snakeai.game.model)</a>
 </li>
       <li><a href="snakeai.game.model.html#snakeai.game.model.Snake.snake">snake (snakeai.game.model.Snake property)</a>
 </li>
-      <li>
-    snakeai.tests.testcopied
-
-      <ul>
-        <li><a href="snakeai.tests.html#module-snakeai.tests.testcopied">module</a>
-</li>
-      </ul></li>
-      <li>
-    snakeai.tests.testgame
-
-      <ul>
-        <li><a href="snakeai.tests.html#module-snakeai.tests.testgame">module</a>
-</li>
-      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li>
-    snakeai.tests.testrecursive
+    snakeai.utils.graphs
 
       <ul>
-        <li><a href="snakeai.tests.html#module-snakeai.tests.testrecursive">module</a>
+        <li><a href="snakeai.utils.graphs.html#module-snakeai.utils.graphs">module</a>
 </li>
       </ul></li>
       <li>
-    snakeai.tests.teststateagent
+    snakeai.utils.train
 
       <ul>
-        <li><a href="snakeai.tests.html#module-snakeai.tests.teststateagent">module</a>
+        <li><a href="snakeai.utils.train.html#module-snakeai.utils.train">module</a>
 </li>
       </ul></li>
       <li><a href="snakeai.game.view.html#snakeai.game.view.GameGUI.SQUARE_SIDE">SQUARE_SIDE (snakeai.game.view.GameGUI attribute)</a>
@@ -466,8 +520,14 @@
 </li>
       <li><a href="snakeai.agents.tabular_agent.html#snakeai.agents.tabular_agent.StateAgent">StateAgent (class in snakeai.agents.tabular_agent)</a>
 </li>
-      <li><a href="snakeai.agents.tabular_agent.html#snakeai.agents.tabular_agent.StateAgent.STEP">STEP (snakeai.agents.tabular_agent.StateAgent attribute)</a>
+      <li><a href="snakeai.agents.simple_mc_agent.html#snakeai.agents.simple_mc_agent.SimpleMCAgent.STEP">STEP (snakeai.agents.simple_mc_agent.SimpleMCAgent attribute)</a>
+
+      <ul>
+        <li><a href="snakeai.agents.simple_tabular_agent.html#snakeai.agents.simple_tabular_agent.SimpleStateAgent.STEP">(snakeai.agents.simple_tabular_agent.SimpleStateAgent attribute)</a>
 </li>
+        <li><a href="snakeai.agents.tabular_agent.html#snakeai.agents.tabular_agent.StateAgent.STEP">(snakeai.agents.tabular_agent.StateAgent attribute)</a>
+</li>
+      </ul></li>
       <li><a href="snakeai.game.agent_controller.html#snakeai.game.agent_controller.AgentGame.step">step() (snakeai.game.agent_controller.AgentGame method)</a>
 
       <ul>
@@ -484,16 +544,14 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="snakeai.game.memento.html#snakeai.game.memento.FrozenState.table">table (snakeai.game.memento.FrozenState property)</a>
 </li>
-      <li><a href="snakeai.game.memento.html#snakeai.game.memento.FrozenState.tableString">tableString (snakeai.game.memento.FrozenState property)</a>
+      <li><a href="snakeai.game.memento.html#snakeai.game.memento.FrozenState.table_string">table_string (snakeai.game.memento.FrozenState property)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="snakeai.tests.html#snakeai.tests.testcopied.train">train() (in module snakeai.tests.testcopied)</a>
-
-      <ul>
-        <li><a href="snakeai.tests.html#snakeai.tests.teststateagent.train">(in module snakeai.tests.teststateagent)</a>
+      <li><a href="snakeai.utils.train.html#snakeai.utils.train.test_agent">test_agent() (in module snakeai.utils.train)</a>
 </li>
-      </ul></li>
+      <li><a href="snakeai.utils.train.html#snakeai.utils.train.train_and_play">train_and_play() (in module snakeai.utils.train)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -528,10 +586,10 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="snakeai.game.agent_controller.html#snakeai.game.agent_controller.AgentGame.waitForQuit">waitForQuit() (snakeai.game.agent_controller.AgentGame method)</a>
+      <li><a href="snakeai.game.agent_controller.html#snakeai.game.agent_controller.AgentGame.wait_for_quit">wait_for_quit() (snakeai.game.agent_controller.AgentGame method)</a>
 
       <ul>
-        <li><a href="snakeai.game.user_controller.html#snakeai.game.user_controller.UserGame.waitForQuit">(snakeai.game.user_controller.UserGame method)</a>
+        <li><a href="snakeai.game.user_controller.html#snakeai.game.user_controller.UserGame.wait_for_quit">(snakeai.game.user_controller.UserGame method)</a>
 </li>
       </ul></li>
       <li><a href="snakeai.game.constants.html#snakeai.game.constants.GUIMode.WINDOW">WINDOW (snakeai.game.constants.GUIMode attribute)</a>

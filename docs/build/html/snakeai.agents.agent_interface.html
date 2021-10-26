@@ -128,8 +128,18 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="snakeai.agents.copy_agent.html">
-     snakeai.agent.copy_agent module
+    <a class="reference internal" href="snakeai.agents.simple_deep_agent.html">
+     snakeai.agent.simple_deep_agent module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.agents.simple_tabular_agent.html">
+     snakeai.agent.simple_tabular_agent module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.agents.simple_mc_agent.html">
+     snakeai.agent.simple_mc_agent module
     </a>
    </li>
   </ul>
@@ -176,10 +186,27 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="snakeai.tests.html">
-   snakeai.tests package
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="snakeai.utils.html">
+   snakeai.utils package
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.utils.train.html">
+     snakeai.utils.train module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.utils.graphs.html">
+     snakeai.utils.graphs module
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -233,20 +260,31 @@
 <h2>AbstractAgent<a class="headerlink" href="#abstractagent" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="snakeai.agents.agent_interface.AbstractAgent">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.agents.agent_interface.</span></span><span class="sig-name descname"><span class="pre">AbstractAgent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.agent_interface.AbstractAgent" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.agents.agent_interface.</span></span><span class="sig-name descname"><span class="pre">AbstractAgent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_epsilon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.agent_interface.AbstractAgent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>Abstract interface for all agents</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>dim</strong> (<em>int</em>) – the side of the board</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>int</em>) – the side of the board</p></li>
+<li><p><strong>initial_epsilon</strong> (<em>float [0,1]</em>) – The initial probability of choosing an action at random</p></li>
+</ul>
 </dd>
 <dt class="field-even">Variables</dt>
-<dd class="field-even"><p><strong>dim</strong> (<em>int</em>) – The side of the board</p>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>dim</strong> (<em>int</em>) – The side of the board</p></li>
+<li><p><strong>epsilon</strong> (<em>float</em><em> [</em><em>0</em><em>,</em><em>1</em><em>]</em>) – The probability of choosing an action at random</p></li>
+</ul>
 </dd>
 </dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakeai.agents.agent_interface.AbstractAgent.MIN_EPSILON">
+<span class="sig-name descname"><span class="pre">MIN_EPSILON</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0.0001</span></em><a class="headerlink" href="#snakeai.agents.agent_interface.AbstractAgent.MIN_EPSILON" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="snakeai.agents.agent_interface.AbstractAgent.execute">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.memento.html#snakeai.game.memento.FrozenState" title="snakeai.game.memento.FrozenState"><span class="pre">snakeai.game.memento.FrozenState</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="snakeai.game.constants.html#snakeai.game.constants.Actions" title="snakeai.game.constants.Actions"><span class="pre">snakeai.game.constants.Actions</span></a></span></span><a class="headerlink" href="#snakeai.agents.agent_interface.AbstractAgent.execute" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.agent_interface.AbstractAgent.execute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the next action to do, given the state</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -258,35 +296,29 @@
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="snakeai.game.constants.html#snakeai.game.constants.Actions" title="snakeai.game.constants.Actions">Actions</a></p>
 </dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>NotImplementedError</strong> – This method must always be overridden</p>
-</dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="snakeai.agents.agent_interface.AbstractAgent.fit">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">oldState</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.memento.html#snakeai.game.memento.FrozenState" title="snakeai.game.memento.FrozenState"><span class="pre">snakeai.game.memento.FrozenState</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.constants.html#snakeai.game.constants.Actions" title="snakeai.game.constants.Actions"><span class="pre">snakeai.game.constants.Actions</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rew</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="snakeai.game.memento.html#snakeai.game.memento.FrozenState" title="snakeai.game.memento.FrozenState"><span class="pre">snakeai.game.memento.FrozenState</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">done</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.agent_interface.AbstractAgent.fit" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">old_state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rew</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">done</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.agent_interface.AbstractAgent.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Train the agent with data for a single step</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>oldState</strong> (<em>FrozenState</em>) – The state before taking the action</p></li>
+<li><p><strong>old_state</strong> (<em>FrozenState</em>) – The state before taking the action</p></li>
 <li><p><strong>action</strong> (<em>Actions</em>) – The action taken</p></li>
 <li><p><strong>rew</strong> (<em>int</em>) – The reward obtained</p></li>
 <li><p><strong>state</strong> (<em>FrozenState</em>) – The state after taking the action</p></li>
 <li><p><strong>done</strong> (<em>bool</em>) – Whether the new state is terminal</p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>NotImplementedError</strong> – This method must always be overridden</p>
-</dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="snakeai.agents.agent_interface.AbstractAgent.load">
-<em class="property"><span class="pre">abstract</span> <span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.agent_interface.AbstractAgent.load" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span> <span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.agent_interface.AbstractAgent.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load the model from a specified path.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -301,12 +333,12 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="snakeai.agents.agent_interface.AbstractAgent.reset">
 <span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.agent_interface.AbstractAgent.reset" title="Permalink to this definition">¶</a></dt>
-<dd><p>Prepare agent for starting a new game</p>
+<dd><p>Prepare the agent for starting a new game</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="snakeai.agents.agent_interface.AbstractAgent.save">
-<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.agent_interface.AbstractAgent.save" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.agent_interface.AbstractAgent.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save the model. If no path is given, a default path will be used.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

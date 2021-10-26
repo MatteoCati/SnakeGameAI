@@ -1,0 +1,447 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>snakeai.agent.simple_tabular_agent module &#8212; SnakeAI 1.0 documentation</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="snakeai.agent.simple_mc_agent module" href="snakeai.agents.simple_mc_agent.html" />
+    <link rel="prev" title="snakeai.agent.simple_deep_agent module" href="snakeai.agents.simple_deep_agent.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="index.html">
+<p class="title">SnakeAI</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="modules.html">
+  snakeai
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="snakeai.agents.html">
+   snakeai.agents package
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.agents.agent_interface.html">
+     snakeai.agent.agent_interface module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.agents.recursive_agent.html">
+     snakeai.agent.recursive_agent module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.agents.tabular_agent.html">
+     snakeai.agent.tabular_agent module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.agents.simple_deep_agent.html">
+     snakeai.agent.simple_deep_agent module
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     snakeai.agent.simple_tabular_agent module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.agents.simple_mc_agent.html">
+     snakeai.agent.simple_mc_agent module
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="snakeai.game.html">
+   snakeai.game package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.game.constants.html">
+     snakeai.game.constants module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.game.model.html">
+     snakeai.game.model module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.game.user_controller.html">
+     snakeai.game.user_controller module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.game.agent_controller.html">
+     snakeai.game.agent_controller module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.game.view.html">
+     snakeai.game.view module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.game.memento.html">
+     snakeai.game.memento module
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="snakeai.utils.html">
+   snakeai.utils package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.utils.train.html">
+     snakeai.utils.train module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.utils.graphs.html">
+     snakeai.utils.graphs module
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#play-function">
+   Play function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simplestateagent">
+   SimpleStateAgent
+  </a>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="snakeai-agent-simple-tabular-agent-module">
+<h1>snakeai.agent.simple_tabular_agent module<a class="headerlink" href="#snakeai-agent-simple-tabular-agent-module" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="play-function">
+<h2>Play function<a class="headerlink" href="#play-function" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="snakeai.agents.simple_tabular_agent.play">
+<span class="sig-prename descclassname"><span class="pre">snakeai.agents.simple_tabular_agent.</span></span><span class="sig-name descname"><span class="pre">play</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.simple_tabular_agent.play" title="Permalink to this definition">¶</a></dt>
+<dd><p>Play with an already trained <cite>SimpleStateAgent</cite></p>
+<p>If no path is given, a default (pre-trained) model will be used</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> (<em>int, default=20</em>) – the size of the board</p></li>
+<li><p><strong>model_path</strong> (<em>str, optional</em>) – the path to the trained model to load</p></li>
+<li><p><strong>fps</strong> (<em>int, default=7</em>) – The number of fps for the game</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="simplestateagent">
+<h2>SimpleStateAgent<a class="headerlink" href="#simplestateagent" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="snakeai.agents.simple_tabular_agent.SimpleStateAgent">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">snakeai.agents.simple_tabular_agent.</span></span><span class="sig-name descname"><span class="pre">SimpleStateAgent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.simple_tabular_agent.SimpleStateAgent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="snakeai.agents.agent_interface.html#snakeai.agents.agent_interface.AbstractAgent" title="snakeai.agents.agent_interface.AbstractAgent"><code class="xref py py-class docutils literal notranslate"><span class="pre">snakeai.agents.agent_interface.AbstractAgent</span></code></a></p>
+<p>A class for an agent that uses a tabular method, with simplified states.</p>
+<p>All Q values for the states are recorded. The agent chooses the action that maximizes Q.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dim</strong> (<em>int</em>) – the side of the board</p>
+</dd>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>state_dict</strong> (<em>dict</em>) – The dictionary that stores Q values</p></li>
+<li><p><strong>GAMMA</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>]</em>) – the gamma value for training</p></li>
+<li><p><strong>STEP</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>]</em>) – the step size</p></li>
+<li><p><strong>epsilon</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>]</em>) – the epsilon value for epsilon-greedy</p></li>
+<li><p><strong>DECAY</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>)</em>) – the decay rate for epsilon</p></li>
+<li><p><strong>MIN_EPSILON</strong> (<em>float</em><em> [</em><em>0</em><em>, </em><em>1</em><em>]</em>) – the minimum value for epsilon when decaying</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakeai.agents.simple_tabular_agent.SimpleStateAgent.DECAY">
+<span class="sig-name descname"><span class="pre">DECAY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0.999</span></em><a class="headerlink" href="#snakeai.agents.simple_tabular_agent.SimpleStateAgent.DECAY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakeai.agents.simple_tabular_agent.SimpleStateAgent.GAMMA">
+<span class="sig-name descname"><span class="pre">GAMMA</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0.995</span></em><a class="headerlink" href="#snakeai.agents.simple_tabular_agent.SimpleStateAgent.GAMMA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakeai.agents.simple_tabular_agent.SimpleStateAgent.MIN_EPSILON">
+<span class="sig-name descname"><span class="pre">MIN_EPSILON</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0.0001</span></em><a class="headerlink" href="#snakeai.agents.simple_tabular_agent.SimpleStateAgent.MIN_EPSILON" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="snakeai.agents.simple_tabular_agent.SimpleStateAgent.STEP">
+<span class="sig-name descname"><span class="pre">STEP</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0.6</span></em><a class="headerlink" href="#snakeai.agents.simple_tabular_agent.SimpleStateAgent.STEP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="snakeai.agents.simple_tabular_agent.SimpleStateAgent.default_value">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">default_value</span></span><a class="headerlink" href="#snakeai.agents.simple_tabular_agent.SimpleStateAgent.default_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>The default Value for Q</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakeai.agents.simple_tabular_agent.SimpleStateAgent.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.simple_tabular_agent.SimpleStateAgent.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the next action to do, given the state</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>FrozenState</em>) – the current state of the game</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the direction in which  to move</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="snakeai.game.constants.html#snakeai.game.constants.Actions" title="snakeai.game.constants.Actions">Actions</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakeai.agents.simple_tabular_agent.SimpleStateAgent.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">old_state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">action</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rew</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">done</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.simple_tabular_agent.SimpleStateAgent.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the Q values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>old_state</strong> (<em>FrozenState</em>) – the state of the game before taking the action</p></li>
+<li><p><strong>action</strong> (<em>Actions</em>) – The action taken</p></li>
+<li><p><strong>rew</strong> (<em>int</em>) – The reward obtained</p></li>
+<li><p><strong>state</strong> (<em>FrozenState</em>) – the state of the game after taking the action</p></li>
+<li><p><strong>done</strong> (<em>bool</em>) – Whether the new state is terminal</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakeai.agents.simple_tabular_agent.SimpleStateAgent.load">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.simple_tabular_agent.SimpleStateAgent.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new agent from the given file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>int</em>) – The size of the board</p></li>
+<li><p><strong>model_path</strong> (<em>str</em>) – The path to the model to load</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If the data in the file is not a <cite>dict</cite> or <cite>defaultdict</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakeai.agents.simple_tabular_agent.SimpleStateAgent.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.simple_tabular_agent.SimpleStateAgent.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare the agent for starting a new game</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="snakeai.agents.simple_tabular_agent.SimpleStateAgent.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.agents.simple_tabular_agent.SimpleStateAgent.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the states of the agent. If a path is not given, uses a default one.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>model_path</strong> (<em>str, optional</em>) – the position where the agent must be saved</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+    <a class='left-prev' id="prev-link" href="snakeai.agents.simple_deep_agent.html" title="previous page">snakeai.agent.simple_deep_agent module</a>
+    <a class='right-next' id="next-link" href="snakeai.agents.simple_mc_agent.html" title="next page">snakeai.agent.simple_mc_agent module</a>
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Matteo.<br/>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.1.2.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

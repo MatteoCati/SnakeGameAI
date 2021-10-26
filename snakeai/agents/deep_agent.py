@@ -58,7 +58,6 @@ class DeepQAgent(AbstractAgent):
         super().__init__(dim)
 
         self.action_space = 4
-        self.epsilon = 1
         self.gamma = 0.95
         self.batch_size = 500
         self.epsilon_min = 0.01

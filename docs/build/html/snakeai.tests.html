@@ -33,7 +33,7 @@
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="snakeai.game.memento module" href="snakeai.game.memento.html" />
+    <link rel="prev" title="snakeai.utils.graphs module" href="snakeai.utils.graphs.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -127,8 +127,18 @@
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="snakeai.agents.copy_agent.html">
-     snakeai.agent.copy_agent module
+    <a class="reference internal" href="snakeai.agents.simple_deep_agent.html">
+     snakeai.agent.simple_deep_agent module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.agents.simple_tabular_agent.html">
+     snakeai.agent.simple_tabular_agent module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.agents.simple_mc_agent.html">
+     snakeai.agent.simple_mc_agent module
     </a>
    </li>
   </ul>
@@ -175,6 +185,28 @@
    </li>
   </ul>
  </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="snakeai.utils.html">
+   snakeai.utils package
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.utils.train.html">
+     snakeai.utils.train module
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="snakeai.utils.graphs.html">
+     snakeai.utils.graphs module
+    </a>
+   </li>
+  </ul>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    snakeai.tests package
@@ -201,28 +233,23 @@
 <nav id="bd-toc-nav">
     <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#submodules">
-   Submodules
+  <a class="reference internal nav-link" href="#testagentcontroller-module">
+   testagentcontroller module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-snakeai.tests.testcligame">
+   testcligame module
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#module-snakeai.tests.testgame">
-   snakeai.tests.testgame module
+   testgame module
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-snakeai.tests.testrecursive">
-   snakeai.tests.testrecursive module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#snakeai-tests-teststateagent-module">
-   snakeai.tests.teststateagent module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#snakeai-tests-testcopied-module">
-   snakeai.tests.testcopied module
+  <a class="reference internal nav-link" href="#module-snakeai.tests.testview">
+   testview module
   </a>
  </li>
 </ul>
@@ -248,102 +275,17 @@
                 
   <div class="section" id="snakeai-tests-package">
 <h1>snakeai.tests package<a class="headerlink" href="#snakeai-tests-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="testagentcontroller-module">
+<h2>testagentcontroller module<a class="headerlink" href="#testagentcontroller-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-snakeai.tests.testcligame">
+<span id="testcligame-module"></span><h2>testcligame module<a class="headerlink" href="#module-snakeai.tests.testcligame" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-snakeai.tests.testgame">
-<span id="snakeai-tests-testgame-module"></span><h2>snakeai.tests.testgame module<a class="headerlink" href="#module-snakeai.tests.testgame" title="Permalink to this headline">¶</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="snakeai.tests.testgame.play">
-<span class="sig-prename descclassname"><span class="pre">snakeai.tests.testgame.</span></span><span class="sig-name descname"><span class="pre">play</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.tests.testgame.play" title="Permalink to this definition">¶</a></dt>
-<dd><p>Play the game on a board of the given size</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>size</strong> (<em>int</em>) – the side of the board</p></li>
-<li><p><strong>fps</strong> (<em>int</em>) – the number of frames per seconds</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
+<span id="testgame-module"></span><h2>testgame module<a class="headerlink" href="#module-snakeai.tests.testgame" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-snakeai.tests.testrecursive">
-<span id="snakeai-tests-testrecursive-module"></span><h2>snakeai.tests.testrecursive module<a class="headerlink" href="#module-snakeai.tests.testrecursive" title="Permalink to this headline">¶</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="snakeai.tests.testrecursive.play">
-<span class="sig-prename descclassname"><span class="pre">snakeai.tests.testrecursive.</span></span><span class="sig-name descname"><span class="pre">play</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">12</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursion_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.tests.testrecursive.play" title="Permalink to this definition">¶</a></dt>
-<dd><p>Play with  a recursive agent</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dim</strong> (<em>int, default=12</em>) – the side of the board</p></li>
-<li><p><strong>recursion_depth</strong> (<em>int, default=12</em>) – the number of recursive steps</p></li>
-<li><p><strong>fps</strong> (<em>int, default=7</em>) – the number of frames per second</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-<div class="section" id="snakeai-tests-teststateagent-module">
-<h2>snakeai.tests.teststateagent module<a class="headerlink" href="#snakeai-tests-teststateagent-module" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-snakeai.tests.teststateagent"></span><dl class="py function">
-<dt class="sig sig-object py" id="snakeai.tests.teststateagent.play">
-<span class="sig-prename descclassname"><span class="pre">snakeai.tests.teststateagent.</span></span><span class="sig-name descname"><span class="pre">play</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.tests.teststateagent.play" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="snakeai.tests.teststateagent.train">
-<span class="sig-prename descclassname"><span class="pre">snakeai.tests.teststateagent.</span></span><span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">episodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agent</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="snakeai.agents.tabular_agent.html#snakeai.agents.tabular_agent.StateAgent" title="snakeai.agents.tabular_agent.StateAgent"><span class="pre">snakeai.agents.tabular_agent.StateAgent</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.tests.teststateagent.train" title="Permalink to this definition">¶</a></dt>
-<dd><p>Train a StateAgent</p>
-<p>This method will train a StateAgent for a certain amount of steps.
-Then it will print some stats about it. The agent will be returned by the function. The
-states are not saved on a file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>episodes</strong> (<em>int</em>) – The number of episodes in which the agent is trained</p></li>
-<li><p><strong>size</strong> (<em>int</em>) – The size of the board (side length)</p></li>
-<li><p><strong>show</strong> (<em>bool, default=False</em>) – Whether the GUI should be visible</p></li>
-<li><p><strong>agent</strong> (<em>StateAgent, optional</em>) – The agent to be trained</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</div>
-<div class="section" id="snakeai-tests-testcopied-module">
-<h2>snakeai.tests.testcopied module<a class="headerlink" href="#snakeai-tests-testcopied-module" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="module-snakeai.tests.testcopied"></span><dl class="py function">
-<dt class="sig sig-object py" id="snakeai.tests.testcopied.play">
-<span class="sig-prename descclassname"><span class="pre">snakeai.tests.testcopied.</span></span><span class="sig-name descname"><span class="pre">play</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snakeai.tests.testcopied.play" title="Permalink to this definition">¶</a></dt>
-<dd><p>Play with an already trained <cite>DQN</cite></p>
-<p>If no path is given, a default (pre-trained) model will be used</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>model_path</strong> (<em>str, optional</em>) – the path to the trained model to load</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="snakeai.tests.testcopied.train">
-<span class="sig-prename descclassname"><span class="pre">snakeai.tests.testcopied.</span></span><span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">episodes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="snakeai.agents.copy_agent.html#snakeai.agents.copy_agent.DQN" title="snakeai.agents.copy_agent.DQN"><span class="pre">snakeai.agents.copy_agent.DQN</span></a></span></span><a class="headerlink" href="#snakeai.tests.testcopied.train" title="Permalink to this definition">¶</a></dt>
-<dd><p>Train a <cite>DQN</cite> agent</p>
-<p>This method will train a StateAgent for a certain amount of steps.
-Then it will print some stats about it. The agent will be returned by the function. The
-states are not saved on a file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>episodes</strong> (<em>int</em>) – The number of episodes in which the agent is trained</p></li>
-<li><p><strong>size</strong> (<em>int</em>) – The size of the board (side length)</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
+<div class="section" id="module-snakeai.tests.testview">
+<span id="testview-module"></span><h2>testview module<a class="headerlink" href="#module-snakeai.tests.testview" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -353,7 +295,7 @@ states are not saved on a file.</p>
               
               <div class='prev-next-bottom'>
                 
-    <a class='left-prev' id="prev-link" href="snakeai.game.memento.html" title="previous page">snakeai.game.memento module</a>
+    <a class='left-prev' id="prev-link" href="snakeai.utils.graphs.html" title="previous page">snakeai.utils.graphs module</a>
 
               </div>
               

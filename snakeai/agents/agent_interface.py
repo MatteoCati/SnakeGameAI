@@ -1,5 +1,5 @@
 from snakeai.game.constants import Actions
-from abc import ABC, abstractmethod, abstractclassmethod
+from abc import ABC, abstractmethod
 
 from snakeai.game.memento import FrozenState
 
@@ -11,15 +11,21 @@ class AbstractAgent(ABC):
     -------------
     dim : int
         the side of the board
+    initial_epsilon : float [0,1]
+        The initial probability of choosing an action at random
 
     Attributes
     ----------------
     dim : int
         The side of the board
+    epsilon : float [0,1]
+        The probability of choosing an action at random
     """
-    def __init__(self, dim: int):
-        self.dim = dim
+    MIN_EPSILON = 0.0001
 
+    def __init__(self, dim: int, initial_epsilon: int = 1):
+        self.dim = dim
+        self.epsilon = initial_epsilon
 
     @abstractmethod
     def execute(self, state: FrozenState) -> Actions:
@@ -34,21 +40,15 @@ class AbstractAgent(ABC):
         --------------
         Actions
             the direction in which  to move
-
-        Raises
-        ------------
-        NotImplementedError
-            This method must always be overridden
         """
 
-
     @abstractmethod
-    def fit(self, oldState: FrozenState, action: Actions, rew: int, state: FrozenState, done: bool):
+    def fit(self, old_state: FrozenState, action: Actions, rew: int, state: FrozenState, done: bool):
         """Train the agent with data for a single step
 
         Parameters
         -----------
-        oldState : FrozenState
+        old_state : FrozenState
             The state before taking the action
         action : Actions
             The action taken
@@ -58,15 +58,10 @@ class AbstractAgent(ABC):
             The state after taking the action
         done : bool
             Whether the new state is terminal
-
-        Raises
-        ----------
-        NotImplementedError
-            This method must always be overridden"""
-
+        """
 
     def reset(self):
-        """Prepare agent for starting a new game"""
+        """Prepare the agent for starting a new game"""
 
     @abstractmethod
     def save(self, model_path: str = None):
