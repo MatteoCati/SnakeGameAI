@@ -2,13 +2,13 @@
 This library implements an environment for the Snake Game. This can be used for playing, but also for training  Reinforcement
 Learning agents.
 
-# Table of Contents
+## Table of Contents
 1. [Playing Snake](#paragraph1)
 2. [Playing with an RL Agent](#paragraph2)
 3. [Training an agent](#paragraph3)
 
 
-##Playing Snake <a name="paragraph1"></a>
+## Playing Snake <a name="paragraph1"></a>
 To play the game, you just need to create a `UserGame` object and call the `play` method.
 ```python
 from snakeai.game.user_controller import UserGame
@@ -28,7 +28,7 @@ game.play()
 ```
 In this case, to play you need to write `up`, `down`, `left`, `right`.
 
-##Playing with a RL Agent <a name="paragraph2"></a>
+## Playing with a RL Agent <a name="paragraph2"></a>
 
 There are five different agents you can choose from, contained in the `snakeai.agents` package:
 * `recursive_agent.Recursive` uses a simulated environment to find the best move 
@@ -48,7 +48,7 @@ play()
 ```
 If you do not specify a path, the program will use a default model. 
 
-##Training an agent <a name="paragraph3"></a>
+## Training an agent <a name="paragraph3"></a>
 To train one of these agents, you can use the following code:
 ```python
 from snakeai.agents.simple_tabular_agent import  SimpleStateAgent
